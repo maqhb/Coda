@@ -1,0 +1,295 @@
+/************** Coomon CSS ****************/
+a:hover{
+    text-decoration: none;
+}
+input:focus{
+    outline: none;
+}
+.p-0 {
+    padding: 0!important;
+}
+.c-w{
+    color: #fff;
+}
+.f-300{
+    font-weight: 300;
+}
+.r-l-b{
+    border-left: 5px solid #d9534f;
+}
+.y-l-b{
+    border-left: 5px solid #f0ad4e;
+}
+.b-l-b{
+    border-left: 5px solid #5bc0de;
+}
+.g-l-b{
+    border-left: 5px solid #5cb85c;
+}
+/************** Common CSS - End *********/
+ 
+#loginSection{
+    height: 100%!important;
+}
+#loginSection .container-fluid{
+    padding: 0px !important;
+}
+#loginSection .wrapImageFrom{
+    display: flex;
+}
+#loginSection .formDiv{
+    width: 700px;
+    background-color: #fff;
+    min-height: 100vh;
+    padding: 150px 55px 55px 55px;
+}
+#loginSection .imageDiv{
+    background-image: url('G:/Office Work/WebCreative/React/Projects/Coda/coda-project/src/assets/loginPage/login.jpg');
+    width: calc(100% - 700px);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+}
+#loginSection .formContent{
+    width: 100%;
+    max-width: 60%;
+    margin: auto;
+}
+#loginSection .formContent h2{
+    text-align: center;
+    color: #291843;
+    font-weight: 500;
+}
+#loginSection .formContent form{
+    padding: 50px 0px;
+}
+#loginSection .formContent label{
+    padding: 15px 0px;
+    color: #291843;
+    font-weight: 500;
+}
+#loginSection .formContent label a{
+    float: right;
+    color: #291843;
+    font-weight: 500;
+    cursor: pointer;
+}
+#loginSection .formContent input{
+    border: 1px solid #e6e6e6;
+    padding: 15px;
+    border-radius: 5px;
+}
+#loginSection .formContent label, input {
+    width: 100%;
+    
+}
+#loginSection .formContent .btnDiv{
+    margin-top: 20px;
+    background: #15d1a5;
+    padding: 15px 0px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+}
+#loginSection .formContent .btnDiv a{
+    color: #fff;
+    font-weight: 600;
+}
+#loginSection .formContent .inputPassword{
+    position: relative;
+}
+#loginSection .formContent .inputPassword i{
+    position: absolute;
+    right: 10px;
+    top: 16px;
+    color: gray;
+}
+/****************** DashBoard ***********/
+#dashBoard .sideNav{
+    top: 0;
+    position: fixed;
+    height: calc(100vh);
+    background: #291843;
+    z-index: 1040;
+    will-change: transform;
+    transition: transform 200ms ease-in-out;
+    padding: 0px !important;
+    width: 250px;
+}
+
+#dashBoard .navbar-inverse {
+    background-color: #fff;
+    border-color: #fff;
+    border-radius: 0px !important;
+}
+#dashBoard .navbar-inverse .navbar-brand,#dashBoard .navbar-right a{
+    color: #291843;
+    font-weight: 500;
+    font-size: 14px;
+}
+#dashBoard .sideNavContent .logoDiv{
+    text-align: center;
+    padding: 20px 0px;
+}
+#dashBoard .sideNavContent .logoDiv img,#dashBoard .sideNavContent  .profileImgdiv img{
+    margin: auto;
+}
+#dashBoard .sideNavContent  .profileImgdiv{
+    text-align: center;
+}
+#dashBoard .sideNavContent .listDiv{
+    margin-top: 40px;
+}
+#dashBoard .sideNavContent .listDiv ul{
+    list-style: none;
+}
+#dashBoard .sideNavContent .listDiv ul>li{
+    margin-bottom: 15px;
+}
+#dashBoard .sideNavContent .listDiv ul>li a{
+    font-size: 16px;
+    color: #9189a4;
+}
+#dashBoard .sideNavContent .listDiv ul>li.active {
+    border-right: 5px solid #15d1a5;
+}
+#dashBoard .sideNavContent .listDiv ul>li.active a{
+    color: #15d1a5 !important;
+}
+#dashBoard .sideNavContent .listDiv ul>li a:hover{
+    color: #15d1a5 !important;
+}
+.main-content{
+    width: calc(100% - 250px);
+    margin-left: 250px;
+    padding: 0px 30px !important;
+}
+#dashBoard .main-filter .badgeDiv span {
+    margin-right: 10px;
+    padding: 0px 15px 4px !important;
+}
+#dashBoard .main-filter .badgeDiv span:nth-child(1){
+    font-size: 17px;
+    padding-left: 0px !important;
+    color: #291843;
+    font-weight: 500;
+}
+#dashBoard .main-filter .selectDiv{
+    text-align: right;
+}
+#dashBoard .main-filter .selectDiv select{
+    border: 0;
+    color: #15d1a5;
+    padding: 10px;
+    font-size: 17px;
+    padding-top: 0px;
+}
+#dashBoard .main-filter .selectDiv label{
+    font-size: 17px;
+    font-weight: 400;
+    color: #291843;
+}
+#dashBoard .room-details{
+    margin-top: 30px;
+}
+#dashBoard .room-details .roomCard{
+    padding: 10px 20px;
+    box-shadow: 0px 6px 15px 0px #d4d4d4;
+    border-radius: 8px;
+    transition: all .3s;
+}
+#dashBoard .room-details .roomCard:hover{
+    box-shadow: 0px 6px 15px 0px #a7a7a7;
+}
+#dashBoard .room-details .roomCard h3{
+    margin-top: 0px;
+}
+#dashBoard .roomDetail{
+    padding-left: 20px;
+    border-radius: 5px 0px 107px 6px;
+}
+#dashBoard .roomDetail hr{
+    margin: 5px;
+}
+/**************** Media Query ***********/
+@media(max-width:1200px)
+{
+    #dashBoard .main-filter .badgeDiv span:nth-child(1){
+        font-size: 14px;
+    }
+    #dashBoard .room-details .roomCard{
+        margin-bottom: 20px;
+    }
+    #dashBoard .main-filter .selectDiv label,#dashBoard .main-filter .selectDiv select{
+        font-size: 14px;
+    }
+    #loginSection .formDiv{
+        width: 600px;
+    }
+    #loginSection .imageDiv{
+        width: calc(100% - 600px);
+    }
+    #loginSection .formContent{
+        max-width: 80%;
+    }
+}
+@media(max-width:992px)
+{
+    #loginSection .formDiv{
+        width: 500px;
+    }
+    #loginSection .imageDiv{
+        width: calc(100% - 500px);
+    }
+    #loginSection .formContent{
+        max-width: 90%;
+    }
+    
+}
+@media(max-width:768px)
+{
+    #loginSection .formDiv{
+        width: 100%;
+    }
+    #loginSection .imageDiv{
+        width: 0px;
+    }
+    #loginSection .formContent{
+        max-width: 90%;
+    }
+    .main-sidebar {
+        transform: translateX(-100%);
+        box-shadow: none;
+       }
+       .main-sidebar.open {
+           transform: translateX(0);
+           box-shadow: 0 0.125rem 9.375rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.5rem rgba(90, 97, 105, 0.12), 0 0.9375rem 1.375rem rgba(90, 97, 105, 0.1), 0 0.4375rem 2.1875rem rgba(165, 182, 201, 0.1);
+       }
+       .main-sidebar .toggle-sidebar {
+           position: absolute;
+           right: 0;
+           height: 100%;
+           padding: 1.25rem;
+           font-size: 1.25rem;
+           border-left: 1px solid #e1e5eb;
+       }
+       .main-sidebar .toggle-sidebar:hover {
+           cursor: pointer;
+       }
+       .main-sidebar .navbar-brand {
+           overflow: hidden;
+           height: 3.75rem;
+           font-size: 1rem;
+           padding-top:0;
+       }  
+}
+
+@media(max-width:568px)
+{
+    #loginSection .formDiv{
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+}
