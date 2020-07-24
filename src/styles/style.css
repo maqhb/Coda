@@ -114,11 +114,19 @@ input:focus{
     background: #291843;
     z-index: 1040;
     will-change: transform;
-    transition: transform 200ms ease-in-out;
+    transition: transform 800ms ease-in-out;
     padding: 0px !important;
     width: 250px;
 }
-
+#dashBoard .sideNav .listDiv .nav-pills>li.active>a,#dashBoard .sideNav .listDiv .nav-pills>li.active>a:focus,#dashBoard .sideNav .listDiv .nav-pills>li.active>a:hover,.nav>li>a:hover{
+    background-color: transparent !important;
+}
+#dashBoard .sideNav .listDiv .nav-pills li{
+    margin-bottom: 0px !important;
+}
+#dashBoard .sideNav .listDiv .nav-pills{
+    padding-left: 20px;
+}
 #dashBoard .navbar-inverse {
     background-color: #fff;
     border-color: #fff;
@@ -161,6 +169,20 @@ input:focus{
 #dashBoard .sideNavContent .listDiv ul>li a:hover{
     color: #15d1a5 !important;
 }
+#dashBoard .sideNavContent .logoDiv{
+    position: relative;
+}
+#dashBoard .sideNavContent .closeBtn{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
+    border: 2px solid #fff;
+    padding: 3px 10px;
+    border-radius: 100%;
+    color: #fff;
+    display: none;
+}
 .main-content{
     width: calc(100% - 250px);
     margin-left: 250px;
@@ -191,6 +213,9 @@ input:focus{
     font-weight: 400;
     color: #291843;
 }
+.navbar-inverse .navbar-toggle:focus,.navbar-inverse .navbar-toggle:hover {
+    background-color: #fff !important;
+}
 #dashBoard .room-details{
     margin-top: 30px;
 }
@@ -212,6 +237,70 @@ input:focus{
 }
 #dashBoard .roomDetail hr{
     margin: 5px;
+}
+#dashBoard .main-navbar .navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #291843;
+}
+#dashBoard .main-content #history h3 {
+    margin-top: 45px;
+    font-weight: 400;
+}
+#dashBoard .main-content #offices h3 {
+    margin-top: 23px;
+    font-weight: 400;
+}
+#dashBoard .main-content #offices .office-btn-div{
+    float: right;
+    padding-right: 14px;
+    margin-top: 30px;
+}
+#dashBoard .main-content #offices .office-btn-div span:nth-child(1) a{
+    background: gray;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-left: 20px;
+    font-size: 15px;
+}
+#dashBoard .main-content #offices .office-btn-div span:nth-child(2) a{
+    background: #15d1a5;
+    color: #fff;
+    padding: 10px 45px;
+    border-radius: 5px;
+    margin-left: 20px;
+    font-size: 15px;
+}
+#dashBoard .main-content #offices .new-offices-div {
+    margin-top: 25px;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv{
+    box-shadow: 0px 6px 15px 0px #afafaf;
+    margin-top: 20px;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv img{
+    width: 100%;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv .conatentDiv{
+    padding: 10px 20px;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv .more-btn-img{
+    position: relative;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv .moreImg{
+    width: 10%;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    background: #fff;
+    border-radius: 100%;
+    cursor: pointer;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv .conatentDiv p{
+    margin-bottom: 5px;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv .conatentDiv h4{
+    font-weight: 700;
+    font-size: 22px;
 }
 /**************** Media Query ***********/
 @media(max-width:1200px)
@@ -235,8 +324,19 @@ input:focus{
         max-width: 80%;
     }
 }
+@media(max-width:1070px)
+{
+    #dashBoard .main-filter .badgeDiv span{
+        padding: 0px 10px 4px !important;
+        margin-right: 2px;
+    }
+}
 @media(max-width:992px)
 {
+    #dashBoard .main-filter .selectDiv {
+        text-align: left;
+        margin-top: 20px;
+    }
     #loginSection .formDiv{
         width: 500px;
     }
@@ -250,6 +350,16 @@ input:focus{
 }
 @media(max-width:768px)
 {
+    #dashBoard .sideNavContent .closeBtn{
+        display: block;
+    }
+    #dashBoard .sideNav{
+        display: none;
+    }
+    #dashBoard .main-content{
+        width: 100%;
+        margin-left: 0%;
+    }
     #loginSection .formDiv{
         width: 100%;
     }
@@ -291,5 +401,9 @@ input:focus{
     #loginSection .formDiv{
         padding-left: 25px;
         padding-right: 25px;
+    }
+    #dashBoard .main-filter .badgeDiv span,#dashBoard .main-filter .badgeDiv span:nth-child(1){
+        width: 100%;
+        margin-bottom: 10px;
     }
 }
