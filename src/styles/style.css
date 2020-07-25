@@ -26,6 +26,9 @@ input:focus{
 .g-l-b{
     border-left: 5px solid #5cb85c;
 }
+.m-t-20{
+    margin-top: 20px;
+}
 /************** Common CSS - End *********/
  
 #loginSection{
@@ -302,6 +305,108 @@ input:focus{
     font-weight: 700;
     font-size: 22px;
 }
+#dashBoard .main-content #offices .new-offices-div .offceDiv  .more-btn-img .office-dropDown{
+    position: absolute;
+    right: -93px;
+    top: 50px;
+    z-index: 999;
+    background: #fff;
+    display: none;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv  .more-btn-img .office-dropDown p{
+    font-size: 18px;
+    margin-bottom: 0px;
+    padding: 0px 10px 5px;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv  .more-btn-img .office-dropDown p a{
+    color: #000;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv  .more-btn-img .office-dropDown p:hover{
+    background: #8080808c;
+    cursor: pointer;
+}
+#dashBoard .main-content #offices .new-offices-div .offceDiv  .more-btn-img .office-dropDown p:hover a{
+    color: #fff;
+}
+.modalBtn{
+    cursor: pointer;
+}
+
+.modal {
+    top:15%;
+ } 
+ .modal-header {
+    border-bottom: none;
+}
+.modal-body{
+    padding: 0px 15px;
+}
+.modal-body p{
+    color: #808080bf;
+}
+.modal-body .formDiv{
+    margin-top: 30px;
+}
+.modal-body .formDiv label{
+    font-weight: 300;
+}
+.modal-body .formDiv input{
+    border: none;
+    border-bottom: 1px solid #808080bf;
+    margin-top: 7px;
+    padding-bottom: 5px;
+}
+.modal-body .formDiv input:focus{
+    border-bottom: 1px solid #15d1a5;
+}
+.modal-body .formDiv input:focus label{
+    color: #15d1a5;
+}
+.modal-footer{
+    border: none;
+}
+.uploadImage{
+    border: 1px solid;
+    border-style: dashed;
+    padding: 40px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+.uploadImage label{
+    width: 100%;
+}
+.uploadImage label span{
+    border-bottom: 1px solid;
+    padding-bottom: 3px;
+}
+#file-input{
+    display: none;
+}
+.imgContentDiv{
+    margin-top: 50px;
+}
+.createRoomBtn{
+    background-color: #15d1a552;
+    color: #15d1a5;
+    font-weight: 600;
+    border: none;
+}
+.createRoomBtn:focus,.createRoomBtn:active,.createRoomBtn:hover{
+    background-color: #15d1a552 !important;
+    color: #15d1a5 !important;
+    font-weight: 600;
+    border: none !important;
+    outline: none;
+    border-color: transparent !important;
+}
+button.close:focus{
+    outline: none;
+}
+.cancelBtn{
+    background-color: #80808030;
+    font-weight: 500;
+    border: none;
+}
 /**************** Media Query ***********/
 @media(max-width:1200px)
 {
@@ -347,6 +452,18 @@ input:focus{
         max-width: 90%;
     }
     
+}
+@media (min-width: 768px)
+{
+    #dashBoard .sideNav {
+        display: block !important;
+        width: 250px !important;
+    }
+    #dashBoard .main-content{
+        display: block;
+        width: calc(100% - 250px) !important;
+        margin-left: 250px !important;
+    }
 }
 @media(max-width:768px)
 {
