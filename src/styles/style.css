@@ -29,6 +29,121 @@ input:focus{
 .m-t-20{
     margin-top: 20px;
 }
+hr{
+    border-color: #a0a0a0;
+}
+:focus,:visited,:active{
+    outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+.modal-content .input-group {
+    position: relative;
+    margin: 40px 0 20px;
+  }
+  
+  .modal-content input {
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #757575;
+  }
+  
+  .modal-content input:focus {
+    outline: none;
+  }
+  
+  .modal-content label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+  
+  .modal-content input:focus ~ label,
+  .modal-content input:valid ~ label {
+    top: -4px;
+    font-size: 14px;
+    color: #15d1a5;
+  }
+  
+  .modal-content .bar {
+    position: relative;
+    display:block;
+    width:315px;
+  }
+  
+  .modal-content .bar:before,
+  .modal-content .bar:after {
+    content: '';
+    height: 1px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #15d1a5;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+  
+  .modal-content .bar:before {
+    left: 50%;
+  }
+  
+  .modal-content .bar:after {
+    right: 50%;
+  }
+  
+  .modal-content input:focus ~ .bar:before,
+  .modal-content input:focus ~ .bar:after {
+    width: 50%;
+  }
+  
+  .modal-content .highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  .modal-content input:focus ~ .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+  }
+  
+  /* animations */
+  @-webkit-keyframes inputHighlighter {
+    from { background: #15d1a5; }
+    to   { width: 0; background: transparent; }
+  }
+  @-moz-keyframes inputHighlighter {
+    from { background: #15d1a5; }
+    to   { width: 0; background: transparent; }
+  }
+  @keyframes inputHighlighter {
+    from { background: #15d1a5; }
+    to   { width: 0; background: transparent; }
+  }
 /************** Common CSS - End *********/
  
 #loginSection{
@@ -347,10 +462,14 @@ input:focus{
 .modal-body .formDiv{
     margin-top: 30px;
 }
-.modal-body .formDiv label{
+.modal-body .formDiv label,.edit-profile-div label{
     font-weight: 300;
 }
-.modal-body .formDiv input{
+.about-company label{
+    font-weight: 300;
+    margin-top: 20px;
+}
+.modal-body .formDiv input,.edit-profile-div input,.about-company input{
     border: none;
     border-bottom: 1px solid #808080bf;
     margin-top: 7px;
@@ -407,9 +526,306 @@ button.close:focus{
     font-weight: 500;
     border: none;
 }
+#setting{
+    margin-bottom: 50px;
+}
+#dashBoard .main-content #setting h3 {
+    margin-top: 44px;
+    font-weight: 400;
+}
+#dashBoard .main-content #setting .profile-image-div{
+    margin-top: 30px;
+}
+#dashBoard .main-content #setting .image-content{
+    width: 100%;
+    max-width: 50%;
+    margin-bottom: 40px;
+}
+#dashBoard .main-content #setting .image-content p{
+    font-size: 15px;
+    color: #808080cf;
+    line-height: 26px;
+}
+.chnageAvatar span{
+    border: 1px solid #15d1a5;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #15d1a5;
+}
+.edit-profile-div,.about-company{
+    margin-top: 40px;
+    width: 100%;
+    max-width: 70%;
+}
+.about-company .uploadImage{
+    padding: 20px;
+}
+.about-company .image-content {
+    width: 100% !important;
+    max-width: 87% !important;
+    margin-bottom: 23px !important;
+}
+.about-company .chnageAvatar span{
+    font-weight: 700;
+}
+.lastSection{
+    float: right;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+.lastSection span:nth-child(1){
+    background: gray;
+    padding: 7px 30px 9px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.lastSection span:nth-child(2){
+    background: #15d1a5;
+    padding: 7px 30px 9px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+.lastSection span:nth-child(1) a,.lastSection span:nth-child(2) a{
+    color: #fff;
+}
+.edit-profile-div .inputPassword{
+    position: relative;
+}
+.edit-profile-div .inputPassword svg{
+    position: absolute;
+    right: 8px;
+    top: 37px;
+    color: gray;
+}
+#dashBoard .main-content #button-services h3{
+    font-weight: 400;
+}
+#dashBoard .main-content #button-services .new-button-service,#user .new-user{
+    float: right;
+    margin-right: 15px;
+    margin-top: 30px;
+}
+#dashBoard .main-content #button-services .new-button-service span,#user .new-user span{
+    background: #15d1a5;
+    padding: 10px 30px;
+    border-radius: 5px;
+}
+#dashBoard .main-content #button-services .btnDiv button {
+    width: 250px;
+}
+#dashBoard .main-content #button-services .new-button-service span a,#user .new-user span a{
+    color: #fff;
+}
+#dashBoard .main-content #button-services .button-services-text{
+    width: 100%;
+    max-width: 50%;
+    margin-top: 20px;
+}
+#dashBoard .main-content #button-services .button-services-text p{
+    color: #80808094;
+}
+#dashBoard .main-content #button-services .btnDiv{
+    display: flex;
+    transition: all .5s;
+    width: 100%;
+    max-width: 30%;
+}
+#dashBoard .main-content #button-services .btnDiv button{
+    padding: 10px 90px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+}
+#dashBoard .main-content #button-services .btnDiv:hover{
+    margin-left: 10px;
+}
+#dashBoard .main-content #button-services .btnDiv:hover .iconDiv{
+    display: block;
+}
+#dashBoard .main-content #button-services .iconDiv{
+    margin-left: 20px;
+    padding-top: 8px;
+    display: none;
+}
+#dashBoard .main-content #button-services .btnDiv:hover .iconDiv svg{
+    cursor: pointer;
+}
+#dashBoard .main-content #button-services .iconDiv svg:nth-child(2){
+    margin-left: 10px;
+}
+#dashBoard .main-content #button-services .new-button-div{
+    margin-top: 40px;
+}
+#dashBoard .main-content #button-services .new-button-div .row{
+    margin: 20px 0px;
+}
+#dashBoard .main-content #button-services .newBtnDiv{
+    margin-top: 30px;
+}
+#dashBoard .main-content #button-services .newBtnDiv a{ 
+    border: 1px solid;
+    padding: 10px 70px;
+    border-style: dashed;
+    border-color: #0000007d;
+    border-radius: 5px;
+    color: gray;
+}
+#button-services .modal-dialog{
+    width: 100%;
+    max-width: 25%;
+}
+#button-services .modal-dialog .formDiv select{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #808080bf;
+    color: #808080bf;
+    font-size: 18px;
+    padding-bottom: 10px;
+}
+#button-services .modal-dialog .formDiv .input-group{
+    margin: 0px;
+    width: 100%;
+}
+#button-services .modal-dialog.modal-footer{
+    margin-top: 30px;
+}
+#user .search-Bar,#history .search-Bar{
+    width: 100%;
+    margin-top: 20px;
+    max-width: 50%;
+}
+#user .search-Bar input,#history .search-Bar input{
+    border: none;
+    border-bottom: 1px solid #808080bf;
+    padding: 5px;
+    font-size: 18px;
+}
+#user .table-Div,#history .table-Div{
+    margin-top: 50px;
+    background-color: whitesmoke;
+    box-shadow: 0px 6px 15px 0px #d4d4d4;
+} 
+#user .table-Div table,#history .table-Div table{
+    margin-bottom: 0px;
+}
+#user .table-Div table thead tr th,#history .table-Div table thead tr th{
+    padding: 20px;
+    font-weight: 600 !important;
+    color: gray;
+}
+#user .table-Div table tr td,#history .table-Div table tr td{
+    font-size: 18px;
+    padding-left: 20px;
+}
+#user .table-Div table tr td:nth-child(6),#history .table-Div table tr td:nth-child(6)
+{
+    padding-left: 45px;
+}
+#history .table-Div table tr td:nth-child(2) h4,#history .table-Div table tr td:nth-child(3) h4{
+    font-weight: 400;
+}
+#history .table-Div table tr td:nth-child(2) p,#history .table-Div table tr td:nth-child(3) p{
+    font-size: 14px;
+    color: darkgray;
+}
+#user .table-Div table tr td:nth-child(6) i{
+    cursor: pointer;
+}
+#user .table-Div .userNameImg{
+    display: flex;
+}
+#user .table-Div .userNameImg img{
+    width: 38px;
+}
+#user .table-Div .userNameImg h4{
+    padding-left: 16px;
+    font-weight: 400;
+}
+#user .table-Div .table-footer,#history .table-Div .table-footer{
+    border-top: 1px solid #ddd;
+    padding: 20px;
+}
+#user .table-Div .table-footer .item-per-page,#history .table-Div .table-footer .item-per-page {
+    width: 200px;
+}
+#user .table-Div .table-footer .item-per-page select,#history .table-Div .table-footer .item-per-page select{
+    width: 80px;
+    margin-left: 10px;
+    border: none;
+    border-bottom: 1px solid #808080bf;
+    background: whitesmoke;
+}
+#user .table-Div .table-footer .item-per-page label,#history .table-Div .table-footer .item-per-page label{
+    font-weight: 400;
+    color: #808080bf;
+}
+#user .table-Div .table-footer .paginationText p,#history .table-Div .table-footer .paginationText p{
+    color: #808080bf;
+}
+#user .table-Div .table-footer .multipleDiv,#history .table-Div .table-footer .multipleDiv{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 60px;
+}
+#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-left,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-left{
+    font-size: 22px;
+    margin: 0px 20px;
+    color: #808080bf;
+    cursor: pointer;
+}
+#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-left,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-left{
+    font-size: 25px;
+    color: #808080bf;
+    cursor: pointer;
+}
+#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-right,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-right{
+    margin: 0px 20px;
+    color: #000;
+    cursor: pointer;
+    font-size: 25px;
+}
+#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-right,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-right{
+    font-size: 22px;
+    color: #000;
+    cursor: pointer;
+}
 /**************** Media Query ***********/
 @media(max-width:1200px)
 {
+    #history .table-Div h4{
+        margin: 0px;
+    }
+    #history .table-Div table thead tr th{
+        padding: 20px 10px;
+    }
+    #user .table-Div table tr td,#user .table-Div .userNameImg h4,#history .table-Div table tr td,#history .table-Div h4{
+        font-size: 14px;
+    }
+    #user .table-Div .table-footer .multipleDiv,#history .table-Div .table-footer .multipleDiv{
+        padding-right: 20px;
+    }
+    #button-services .modal-dialog{
+        max-width: 40%;
+    }
+    #dashBoard .main-content #button-services .btnDiv{
+        max-width: 60%;
+    }
+    #dashBoard .main-content #setting .image-content{
+        max-width: 100%;
+        margin-bottom: 25px;
+    }
+    .edit-profile-div, .about-company,.about-company .image-content{
+        max-width: 100% !important;
+    }
+    .about-company .uploadImage{
+        padding: 10px;
+    }
+    #dashBoard .main-content #setting .image-content{
+        margin-bottom: 10px !important;
+    }
+    .chnageAvatar span{
+        padding: 5px 10px;
+    }
     #dashBoard .main-filter .badgeDiv span:nth-child(1){
         font-size: 14px;
     }
@@ -438,6 +854,36 @@ button.close:focus{
 }
 @media(max-width:992px)
 {
+    #user .table-Div .userNameImg img{
+        width: 20px;
+        height: 20px;
+    }
+    .table-Div .userNameImg h4{
+        margin: 0px;
+    }
+    #button-services .modal-dialog {
+        max-width: 50%;
+    }
+    #dashBoard .main-content #button-services .new-button-service{
+        margin-top: 20px;
+    }
+    #dashBoard .main-content #button-services .new-button-service span{
+        padding: 10px 10px;
+        font-size: 11px;
+    }
+    #dashBoard .main-content #setting .image-content p{
+        font-size: 13px;
+        line-height: 18px;
+    }
+    #dashBoard .main-content #setting .image-content{
+        margin-bottom: 10px;
+        font-size: 10px;
+    }
+    #dashBoard .main-content #offices .office-btn-div span:nth-child(1) a,#dashBoard .main-content #offices .office-btn-div span:nth-child(2) a{
+        padding: 10px 10px;
+        margin-left: 10px;
+        font-size: 10px;
+    }
     #dashBoard .main-filter .selectDiv {
         text-align: left;
         margin-top: 20px;
@@ -451,7 +897,15 @@ button.close:focus{
     #loginSection .formContent{
         max-width: 90%;
     }
-    
+    .modal-dialog{
+        width: 480px;
+    }
+    #dashBoard .main-content #button-services .button-services-text{
+        max-width: 100%;
+    }
+    #dashBoard .main-content #button-services .new-button-div{
+        margin-top: 0px;
+    }
 }
 @media (min-width: 768px)
 {
@@ -467,6 +921,47 @@ button.close:focus{
 }
 @media(max-width:768px)
 {
+    #button-services .modal-dialog {
+        max-width: 100%;
+    }
+    #dashBoard .main-content #button-services .new-button-service,#user .new-user {
+        margin-top: 20px;
+        float: left;
+    }
+    .about-company .chnageAvatar{
+        width: 100%;
+        text-align: center;
+    }
+    .edit-profile-div .m-b-10,.about-company .uploadImage{
+        margin-bottom: 10px;
+    }
+    #dashBoard .main-content #setting .profile-image-div img{
+        width: 100%;
+        max-width: 20%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    #dashBoard .main-content #setting .image-content p{
+        text-align: center;
+        width: 100%;
+        max-width: 70%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    #dashBoard .main-content #setting .profile-image-div{
+        text-align: center;
+    }
+    .modal-dialog{
+        width: 100%;
+        margin: auto;
+        max-width: 400px;
+    }
+    #dashBoard .main-content #offices .office-btn-div{
+        float: left;
+    }
+    #dashBoard .main-content #offices .office-btn-div span:nth-child(1) a{
+        margin-left: 0px;
+    }
     #dashBoard .sideNavContent .closeBtn{
         display: block;
     }
@@ -515,6 +1010,56 @@ button.close:focus{
 
 @media(max-width:568px)
 {
+    #user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-left,#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-right,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-left,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-right{
+        margin: 0px 6px;
+    }
+    #user .table-Div .table-footer,#history .table-Div .table-footer{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .paginationText{
+        padding-top: 4px;
+    }
+    #user .table-Div .table-footer .multipleDiv,#history .table-Div .table-footer .multipleDiv{
+        padding-right: 0px;
+    }
+    #user .table-Div .table-footer .item-per-page select,#history .table-Div .table-footer .item-per-page select{
+        width: 45px;
+    }
+    #user .table-Div .table-footer .item-per-page,#history .table-Div .table-footer .item-per-page{
+        width: 140px;
+    }
+    #user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-left,#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-right,#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-right,#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-left,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-left,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-right,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-right,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-left{
+        font-size: 13px;
+    }
+    #user .table-Div .table-footer .item-per-page select,#user .table-Div .table-footer .item-per-page label,#user .table-Div .table-footer .paginationText p,#history .table-Div .table-footer .item-per-page select,#history .table-Div .table-footer .item-per-page label,#history .table-Div .table-footer .paginationText p{
+        font-size: 10px;
+    }
+    #dashBoard .main-content #button-services .btnDiv {
+        max-width: 100%;
+    }
+    .lastSection{
+        float: initial;
+    }
+    .lastSection .btnDiv{
+        display: grid;
+    }
+    .lastSection span:nth-child(1),.lastSection span:nth-child(){
+        text-align: center;
+        margin-bottom: 15px;
+        margin-left: 0px;
+    }
+    #dashBoard .main-content #setting .profile-image-div img{
+        max-width: 35%;
+    }
+    #dashBoard .main-content #setting .image-content p{
+        max-width: 100%;
+    }
+    .modal-dialog {
+        width: 100%;
+        margin: auto;
+        max-width: 350px;
+    }
     #loginSection .formDiv{
         padding-left: 25px;
         padding-right: 25px;

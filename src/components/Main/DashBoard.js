@@ -2,10 +2,12 @@ import React,{useState} from 'react';
 import '../../styles/style.css';
 import logo from '../../assets/dashboard/logo.PNG';
 import profile from '../../assets/dashboard/userProfile.PNG';
+import avatar from '../../assets/dashboard/avatar.png';
+import userTable from '../../assets/dashboard/userTable.png';
 import office from '../../assets/dashboard/office.jpg';
 import more from '../../assets/dashboard/more.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome,faHistory,faUsers,faCog,faEdit,faBuilding,faTimes,faCamera } from "@fortawesome/free-solid-svg-icons";
+import { faHome,faHistory,faUsers,faCog,faEdit,faBuilding,faTimes,faCamera,faEye,faTrash,faPen,faPlus } from "@fortawesome/free-solid-svg-icons";
 
 
 const DashBoard = () =>{
@@ -15,9 +17,11 @@ const DashBoard = () =>{
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"}
     ])
-    const dropdownShow = (e) =>{
-        
-    }
+    const[newButton,setNewButton]=useState([
+        {BtnText:"ACTION #7",BtnColor:"#15d1a5"},
+        {BtnText:"ACTION #8",BtnColor:"#f0ad4e"},
+        {BtnText:"ACTION #9",BtnColor:"#d9534f"}
+    ])
     const openMenu = () =>{
         if(document.getElementsByClassName('sideNav')[0].style.display=="block")
         {
@@ -43,6 +47,20 @@ const DashBoard = () =>{
             setNewOffice(state=>[...state,newObj]);
         }
     }
+    const newMakeButton = () =>{
+        const btnName=document.getElementById('btn-name').value;
+        const btnIndex=document.getElementById("colors").selectedIndex;
+        var btnOption = document.getElementById("colors").options
+        if(btnName!=""){
+            const newObj={'BtnText':btnName,'BtnColor':btnOption[btnIndex].text};
+            setNewButton(state=>[...state,newObj]);
+        }
+        console.log(newButton.index);
+    }
+    const [password,setPassword]=useState(false);
+    const togglePasswordVisiblity = () => {
+        setPassword(password ? false : true);
+    };
     return(
         <section id="dashBoard">
             <div className="container-fluid">
@@ -62,9 +80,9 @@ const DashBoard = () =>{
                                     <li className="active"><a data-toggle="pill" href="#home"><FontAwesomeIcon icon={faHome} /> DashBoard</a></li>
                                     <li><a data-toggle="pill" href="#history"><FontAwesomeIcon icon={faHistory} /> History Request</a></li>
                                     <li><a data-toggle="pill" href="#offices"><FontAwesomeIcon icon={faBuilding} /> Offices</a></li>
-                                    <li><a data-toggle="pill" href="#menu3"><FontAwesomeIcon icon={faUsers} /> User</a></li>
-                                    <li><a data-toggle="pill" href="#menu4"><FontAwesomeIcon icon={faCog} /> Settings</a></li>
-                                    <li><a data-toggle="pill" href="#menu5"><FontAwesomeIcon icon={faEdit} /> Button Services</a></li>
+                                    <li><a data-toggle="pill" href="#user"><FontAwesomeIcon icon={faUsers} /> User</a></li>
+                                    <li><a data-toggle="pill" href="#setting"><FontAwesomeIcon icon={faCog} /> Settings</a></li>
+                                    <li><a data-toggle="pill" href="#button-services"><FontAwesomeIcon icon={faEdit} /> Button Services</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -171,9 +189,143 @@ const DashBoard = () =>{
                             </div>
                             <div id="history" className="tab-pane fade">
                                 <h3>Historical Support Request</h3>
-                                <div className="tableDiv">
-                                    
+                                <div className="search-Bar">
+                                    <div className="row">
+                                        <div className="col-lg-12">
+                                            <input placeholder="Search User"/>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div className="table-Div">
+                                        <div className="container-fluid p-0">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Support Request</th>
+                                                    <th>Accept By</th>
+                                                    <th>Complete At</th>
+                                                    <th>Duration In Room</th>
+                                                    <th>Duration on the Way</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <h4>Room #5</h4>
+                                                            <p>at 05:35 PM</p>
+                                                        </td>
+                                                        <td>
+                                                            <h4>Martin Camiletti</h4>
+                                                            <p>at 05:40 PM</p>
+                                                        </td>
+                                                        <td>05:44 PM</td>
+                                                        <td>05:15 minutes</td>
+                                                        <td>
+                                                            0:15 second
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <h4>Room #5</h4>
+                                                            <p>at 05:35 PM</p>
+                                                        </td>
+                                                        <td>
+                                                            <h4>Martin Camiletti</h4>
+                                                            <p>at 05:40 PM</p>
+                                                        </td>
+                                                        <td>05:44 PM</td>
+                                                        <td>05:15 minutes</td>
+                                                        <td>
+                                                            0:15 second
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <h4>Room #5</h4>
+                                                            <p>at 05:35 PM</p>
+                                                        </td>
+                                                        <td>
+                                                            <h4>Martin Camiletti</h4>
+                                                            <p>at 05:40 PM</p>
+                                                        </td>
+                                                        <td>05:44 PM</td>
+                                                        <td>05:15 minutes</td>
+                                                        <td>
+                                                            0:15 second
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <h4>Room #5</h4>
+                                                            <p>at 05:35 PM</p>
+                                                        </td>
+                                                        <td>
+                                                            <h4>Martin Camiletti</h4>
+                                                            <p>at 05:40 PM</p>
+                                                        </td>
+                                                        <td>05:44 PM</td>
+                                                        <td>05:15 minutes</td>
+                                                        <td>
+                                                            0:15 second
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <h4>Room #5</h4>
+                                                            <p>at 05:35 PM</p>
+                                                        </td>
+                                                        <td>
+                                                            <h4>Martin Camiletti</h4>
+                                                            <p>at 05:40 PM</p>
+                                                        </td>
+                                                        <td>05:44 PM</td>
+                                                        <td>05:15 minutes</td>
+                                                        <td>
+                                                            0:15 second
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                 
+                                            </table>
+                                            </div>
+                                            <div className="table-footer">
+                                                <div className="container-fluid">
+                                                            <div className="row">
+                                                                <div className="col-lg-12">
+                                                                    <div className="multipleDiv">
+                                                                            <div className="item-per-page">
+                                                                                <label>Item per page:</label>
+                                                                                <select>
+                                                                                    <option>1</option>
+                                                                                    <option>2</option>
+                                                                                    <option>3</option>
+                                                                                    <option>4</option>
+                                                                                    <option>5</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div className="paginationText">
+                                                                                <p>1-5 of 20</p>
+                                                                            </div>
+                                                                            <div className="arrowsDiv">
+                                                                                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                                                            </div>
+                                                                        </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                        </div>
+                                    </div>
                             </div>
                             <div id="offices" className="tab-pane fade">
                             <div class="modal fade" id="myModal" role="dialog">
@@ -232,10 +384,10 @@ const DashBoard = () =>{
                             </div>
                                 <div className="container-fluid">
                                     <div className="row">
-                                        <div className="col-lg-3">
+                                        <div className="col-lg-3 col-md-3 col-sm-3">
                                             <h3>Offices</h3>
                                         </div>
-                                        <div className="col-lg-9">
+                                        <div className="col-lg-9 col-md-9 col-sm-9">
                                             <div className="office-btn-div">
                                                 <span><a>DOWNLOAD ALL QR CODE</a></span>
                                                 <span type="button"  data-toggle="modal" data-target="#myModal" className="modalBtn"><a>NEW OFFICE</a></span>
@@ -247,11 +399,11 @@ const DashBoard = () =>{
                                     <div className="container-fluid">
                                         <div className="row">
                                         {newOffice.map((item,index)=>(
-                                            <div className="col-lg-3 col-md-3 col-sm-3">
+                                            <div className="col-lg-3 col-md-3 col-sm-6">
                                                 <div className="offceDiv">
                                                     <div className="more-btn-img">
                                                         <img src={office}/>
-                                                        <img className="moreImg" src={more} onClick={dropdownShow(index)}/>
+                                                        <img className="moreImg" src={more}/>
                                                             <div className="office-dropDown">
                                                                 <p><a>View QR Code</a></p>
                                                                 <p><a>Edit Room</a></p>
@@ -271,9 +423,335 @@ const DashBoard = () =>{
                                 </div>
 
                             </div>
-                            <div id="menu3" className="tab-pane fade">
-                            <h3>Menu 3</h3>
-                            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                            <div id="user" className="tab-pane fade">
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-lg-6 col-md-6 col-sm-6">
+                                            <h3>User</h3>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6">
+                                            <div className="new-user">
+                                                <span> 
+                                                    <a>NEW USER</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="search-Bar">
+                                        <div className="row">
+                                            <div className="col-lg-12">
+                                                <input placeholder="Search User"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="table-Div">
+                                        <div className="container-fluid p-0">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>User Name</th>
+                                                    <th>Role</th>
+                                                    <th>Office</th>
+                                                    <th>Register In</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <div className="userNameImg">
+                                                                <img src={userTable} className="img-responsive"/>
+                                                                <h4>Emilio Guerrilla</h4>
+                                                            </div>
+                                                        </td>
+                                                        <td>Admin - Technician</td>
+                                                        <td>5 - D</td>
+                                                        <td>15/11/2020</td>
+                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <div className="userNameImg">
+                                                                <img src={userTable} className="img-responsive"/>
+                                                                <h4>Emilio Guerrilla</h4>
+                                                            </div>
+                                                        </td>
+                                                        <td>Admin - Technician</td>
+                                                        <td>5 - D</td>
+                                                        <td>15/11/2020</td>
+                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <div className="userNameImg">
+                                                                <img src={userTable} className="img-responsive"/>
+                                                                <h4>Emilio Guerrilla</h4>
+                                                            </div>
+                                                        </td>
+                                                        <td>Admin - Technician</td>
+                                                        <td>5 - D</td>
+                                                        <td>15/11/2020</td>
+                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <div className="userNameImg">
+                                                                <img src={userTable} className="img-responsive"/>
+                                                                <h4>Emilio Guerrilla</h4>
+                                                            </div>
+                                                        </td>
+                                                        <td>Admin - Technician</td>
+                                                        <td>5 - D</td>
+                                                        <td>15/11/2020</td>
+                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <div className="userNameImg">
+                                                                <img src={userTable} className="img-responsive"/>
+                                                                <h4>Emilio Guerrilla</h4>
+                                                            </div>
+                                                        </td>
+                                                        <td>Admin - Technician</td>
+                                                        <td>5 - D</td>
+                                                        <td>15/11/2020</td>
+                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                                    </tr>
+                                                </tbody>
+                                                 
+                                            </table>
+                                            </div>
+                                            <div className="table-footer">
+                                                <div className="container-fluid">
+                                                            <div className="row">
+                                                                <div className="col-lg-12">
+                                                                    <div className="multipleDiv">
+                                                                            <div className="item-per-page">
+                                                                                <label>Item per page:</label>
+                                                                                <select>
+                                                                                    <option>1</option>
+                                                                                    <option>2</option>
+                                                                                    <option>3</option>
+                                                                                    <option>4</option>
+                                                                                    <option>5</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div className="paginationText">
+                                                                                <p>1-5 of 20</p>
+                                                                            </div>
+                                                                            <div className="arrowsDiv">
+                                                                                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                                                                                <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                                                            </div>
+                                                                        </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="setting" className="tab-pane fade">
+                                <h3>About you</h3>
+                                <div className="profile-image-div">
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            <div className="col-lg-2 col-md-2 col-sm-2">
+                                                <img className="img-responsive" src={avatar}/>
+                                            </div>
+                                            <div className="col-lg-10 col-md-10 col-sm-10">
+                                                <div className="image-content">
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                                </div>
+                                                <label for="file-input" className="chnageAvatar"><span >CHANGE AVATAR</span>
+                                                    <input id="file-input" type="file" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="edit-profile-div">
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            <div className="col-lg-6 col-md-6 col-sm-6">
+                                                <label>Name</label>
+                                                <input placeholder="First Name" className="m-b-10"/>
+                                            </div>
+                                            <div className="col-lg-6 col-md-6 col-sm-6">
+                                                <label>Last Name</label>
+                                                <input placeholder="Last Name"/>
+                                            </div>
+                                        </div>
+                                        <div className="row m-t-20">
+                                            <div className="col-lg-6 col-md-6 col-sm-6">
+                                                <label>Email</label>
+                                                <input placeholder="comapny@example.com" className="m-b-10"/>
+                                            </div>
+                                            <div className="col-lg-6 col-md-6 col-sm-6 ">
+                                            <div className="inputPassword">
+                                                <label>Password</label>
+                                                <input placeholder="Password"  type={password ? "text" : "password"}></input>
+                                                <FontAwesomeIcon onClick={togglePasswordVisiblity} icon={faEye}/>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="about-company">
+                                    <h3>About your Company</h3>
+                                    <div className="row">
+                                        <div className="col-lg-12">
+                                            <label>Company Name</label>
+                                            <input placeholder="Company Name"/>
+                                        </div>
+                                    </div>
+                                    <div className="row m-t-20">
+                                        <div className="col-lg-3 col-md-3 col-sm-3">
+                                            <div className="uploadImage">
+                                                <FontAwesomeIcon icon={faCamera}/>
+                                                <p>Drop your logo here or</p>
+                                                <label for="file-input"><span >Upload a Image</span>
+                                                    <input id="file-input" type="file" />
+                                                </label> 
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-9 col-md-9 col-sm-9">
+                                        <div className="image-content">
+                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                                </div>
+                                                <label for="file-input" className="chnageAvatar"><span >CHANGE LOGO</span>
+                                                    <input id="file-input" type="file" />
+                                                </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className="lastSection">
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            <div className="col-lg-12">
+                                                <div className="btnDiv">
+                                                    <span>
+                                                        <a href="">CANCELAR</a>
+                                                    </span>
+                                                    <span>
+                                                        <a href="">GUARDAR CAMBIOS</a>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="button-services" className="tab-pane fade">
+                            <div class="modal fade" id="buttonModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">New Button Service</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
+                                            <div className="formDiv">
+                                                <div className="container-fluid">
+                                                    <div className="row">
+                                                        <div className="col-lg-12">
+                                                        <div class="input-group">
+                                                            <input type="text" required id="btn-name"/>
+                                                            <span class="highlight"></span>
+                                                            <span class="bar"></span>
+                                                            <label>Name</label>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row m-t-20">
+                                                        <div className="col-lg-12">
+                                                            <div class="input-group">
+                                                            
+                                                            <select id="colors">
+                                                                <option>#15d1a5</option>
+                                                                <option>#f0ad4e</option>
+                                                                <option>#d9534f</option>
+                                                            </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row m-t-20">
+                                                        <div className="col-lg-12">
+                                                            <div class="input-group">
+                                                                <input type="text" required/>
+                                                                <span class="highlight"></span>
+                                                                <span class="bar"></span>
+                                                                <label>Description</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">CANCEL</button>
+                                        <button type="button" class="btn btn-default createRoomBtn" data-dismiss="modal" onClick={newMakeButton}>SAVE</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-lg-6 col-md-6 col-sm-6">
+                                            <h3>Button Services</h3>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6">
+                                            <div className="new-button-service">
+                                                <span type="button"  data-toggle="modal" data-target="#buttonModal" className="modalBtn"> 
+                                                    <a>NEW BUTTON SERVICE</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="button-services-text">
+                                        <div className="row">
+                                            <div className="col-lg-12">
+                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="new-button-div">
+                                        <div className="container-fluid p-0">
+                                            {newButton.map((item,index)=>( 
+                                                <div className="row">
+                                                    <div className="col-lg-12 p-0">
+                                                        <div className="btnDiv">
+                                                            <button style={{backgroundColor:item.BtnColor}}>{item.BtnText}</button>
+                                                            <div className="iconDiv">
+                                                                <FontAwesomeIcon icon={faPen}/>
+                                                                <FontAwesomeIcon icon={faTrash}/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                            <div className="row">
+                                                <div className="col-lg-12 p-0">
+                                                    <div className="newBtnDiv">
+                                                        <a><FontAwesomeIcon icon={faPlus}/> NEW BUTTON</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div> 
