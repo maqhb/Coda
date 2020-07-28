@@ -47,14 +47,15 @@ hr{
 
 .modal-content .input-group {
     position: relative;
-    margin: 40px 0 20px;
+    width: 100%;
   }
-  
+  .modal-content .input-group .w-100{
+      width: 100%;
+  }
   .modal-content input {
     font-size: 18px;
     padding: 10px 10px 10px 5px;
     display: block;
-    width: 100%;
     border: none;
     border-bottom: 1px solid #757575;
   }
@@ -86,7 +87,6 @@ hr{
   .modal-content .bar {
     position: relative;
     display:block;
-    width:315px;
   }
   
   .modal-content .bar:before,
@@ -110,10 +110,10 @@ hr{
     right: 50%;
   }
   
-  .modal-content input:focus ~ .bar:before,
+  /* .modal-content input:focus ~ .bar:before,
   .modal-content input:focus ~ .bar:after {
     width: 50%;
-  }
+  } */
   
   .modal-content .highlight {
     position: absolute;
@@ -198,8 +198,9 @@ hr{
     border: 1px solid #e6e6e6;
     padding: 15px;
     border-radius: 5px;
+    width: 100%;
 }
-#loginSection .formContent label, input {
+#loginSection .formContent label {
     width: 100%;
     
 }
@@ -426,7 +427,6 @@ hr{
     top: 50px;
     z-index: 999;
     background: #fff;
-    display: none;
 }
 #dashBoard .main-content #offices .new-offices-div .offceDiv  .more-btn-img .office-dropDown p{
     font-size: 18px;
@@ -474,6 +474,7 @@ hr{
     border-bottom: 1px solid #808080bf;
     margin-top: 7px;
     padding-bottom: 5px;
+    width: 100%;
 }
 .modal-body .formDiv input:focus{
     border-bottom: 1px solid #15d1a5;
@@ -490,13 +491,24 @@ hr{
     padding: 40px 20px;
     border-radius: 5px;
     text-align: center;
+    position: relative;
 }
+
 .uploadImage label{
     width: 100%;
+    position: absolute;
+    bottom: 16px;
 }
 .uploadImage label span{
     border-bottom: 1px solid;
     padding-bottom: 3px;
+    position: absolute;
+    bottom: -2px;
+    width: 100%;
+    left: 48px;
+    max-width: 52%;
+    font-size: 14px;
+    font-weight: 700;
 }
 #file-input{
     display: none;
@@ -567,6 +579,15 @@ button.close:focus{
 }
 .about-company .chnageAvatar span{
     font-weight: 700;
+}
+.about-company .uploadImage label{
+    position: initial;
+    bottom: initial;
+}
+.about-company .uploadImage label span{
+    position: initial;
+    bottom: initial;
+    left: initial;
 }
 .lastSection{
     float: right;
@@ -699,6 +720,7 @@ button.close:focus{
     border-bottom: 1px solid #808080bf;
     padding: 5px;
     font-size: 18px;
+    width: 100%;
 }
 #user .table-Div,#history .table-Div{
     margin-top: 50px;
@@ -789,9 +811,124 @@ button.close:focus{
     color: #000;
     cursor: pointer;
 }
+#office_Drag_Drop{
+    display: none;
+}
+#office_Drag_Drop p{
+    cursor: pointer;
+}
+#office_Drag_Drop p a{
+    color: darkgray;
+}
+#office_Drag_Drop p i{
+    margin-right: 20px;
+    color: darkgray;
+}
+#office_Drag_Drop h3{
+    margin-bottom: 0;
+    font-weight: 400;
+}
+#office_Drag_Drop .dragdropText{
+    color: darkgray;
+    margin-top: 10px;
+}
+#office_Drag_Drop .disableButton,#office_Drag_Drop .activeButton{
+    margin-top: 30px;
+}
+#office_Drag_Drop .disableButton ol,#office_Drag_Drop .activeButton ol{
+    padding: 0px;
+    list-style: none;
+}
+#office_Drag_Drop .disableButton i,#office_Drag_Drop .activeButton i{
+    margin-top: 4px;
+}
+#office_Drag_Drop .disableButton,#office_Drag_Drop .activeButton{
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0px 6px 15px 0px #d4d4d4;
+    min-height: 417px;
+    overflow: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+#office_Drag_Drop .disableButton ol li .disableBtn,#office_Drag_Drop .activeButton ol li .disableBtn{
+    margin-bottom: 15px;
+    cursor: pointer;
+    width: 100%;
+    background: darkgray;
+    padding: 10px 20px;
+    border-radius: 2px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+#office_Drag_Drop .btnDiv{
+    width: 100%;
+    max-width: 60%;
+}
+#activeList li:nth-child(even) .disableBtn{
+    background-color: #f0ad4e !important;
+}
+#activeList li:nth-child(odd) .disableBtn{
+    background-color: #15d1a5 !important;
+}
+#office_Drag_Drop .disableButton ol li .disableBtn:hover {
+    background-color: #673ab7a8;
+}
+#office_Drag_Drop .btnDiv h3{
+    font-size: 20px;
+    font-weight: 600;
+}
+#activeList li .disableBtn .fa-chevron-right:before{
+    content: "\f053";
+}
+#QRCode .modal-dialog{
+    width: 100%;
+    max-width: 30%;
+}
+#QRCode .contentDiv{
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+#QRCode .contentDiv .textDiv p,#QRCode .contentDiv .textDiv h4{
+    margin: 0px;
+}
+#QRCode .modal-content{
+    padding: 20px;
+}
+#QRCode .contentDiv .textDiv h4 {
+    font-size: 26px;
+}
+#QRCode .contentDiv i{
+    padding-top: 22px;
+    font-size: 25px;
+}
+#QRCode .paraText{
+    margin-top: 20px;
+    font-size: 16px;
+}
+#QRCode .modal-footer{
+    text-align: center;
+}
+#QRCode .modal-footer .download-QR{
+    margin-top: 20px;
+    background: #15d1a5;
+    padding: 16px 32px;
+    border-radius: 5px;
+    font-size: 25px;
+    cursor: pointer;
+}
+#QRCode .modal-footer a{
+    color: #fff;
+}
 /**************** Media Query ***********/
 @media(max-width:1200px)
 {
+    #office_Drag_Drop .btnDiv{
+        max-width: 80%;
+    }
     #history .table-Div h4{
         margin: 0px;
     }
@@ -854,6 +991,9 @@ button.close:focus{
 }
 @media(max-width:992px)
 {
+    #office_Drag_Drop .btnDiv {
+        max-width: 100%;
+    }
     #user .table-Div .userNameImg img{
         width: 20px;
         height: 20px;
@@ -1010,6 +1150,9 @@ button.close:focus{
 
 @media(max-width:568px)
 {
+    #user .search-Bar,#history .search-Bar{
+        max-width: 100%;
+    }
     #user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-left,#user .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-right,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-double-left,#history .table-Div .table-footer .multipleDiv .arrowsDiv .fa-angle-right{
         margin: 0px 6px;
     }
