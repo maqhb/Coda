@@ -49,11 +49,14 @@ crossorigin="anonymous"></script>
 crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-//  $(document).ready(function() {
-//   jQuery("#button-services button").hover(function() {
-//     $('#button-services .iconDiv').style={{'display','block'}}
-//   });
-// });
+ $(document).ready(function() {
+  $(".draggable-left, .draggable-right").sortable({
+  connectWith: ".connected-sortable",
+  stack: ".connected-sortable ul"
+}).disableSelection();
+});
 </script>
 </html>
