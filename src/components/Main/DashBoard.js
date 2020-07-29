@@ -167,8 +167,8 @@ const DashBoard = () =>{
                                                 <div className="roomCard">
                                                     <div className="roomDetail y-l-b">
                                                         <h3>Room 3</h3>
-                                                        <p>Support Request</p>
-                                                        <p>05:35 PM</p>
+                                                        <p className="text">Support Request</p>
+                                                        <p className="text">05:35 PM</p>
                                                         <hr/>
                                                         <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
                                                     </div>
@@ -178,8 +178,8 @@ const DashBoard = () =>{
                                                 <div className="roomCard">
                                                     <div className="roomDetail b-l-b">
                                                         <h3>Room 3</h3>
-                                                        <p>Support Request</p>
-                                                        <p>05:35 PM</p>
+                                                        <p className="text">Support Request</p>
+                                                        <p className="text">05:35 PM</p>
                                                         <hr/>
                                                         <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
                                                     </div>
@@ -189,8 +189,8 @@ const DashBoard = () =>{
                                                 <div className="roomCard">
                                                     <div className="roomDetail g-l-b">
                                                         <h3>Room 3</h3>
-                                                        <p>Support Request</p>
-                                                        <p>05:35 PM</p>
+                                                        <p className="text">Support Request</p>
+                                                        <p className="text">05:35 PM</p>
                                                         <hr/>
                                                         <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
                                                     </div>
@@ -200,8 +200,8 @@ const DashBoard = () =>{
                                                 <div className="roomCard">
                                                     <div className="roomDetail r-l-b">
                                                         <h3>Room 3</h3>
-                                                        <p>Support Request</p>
-                                                        <p>05:35 PM</p>
+                                                        <p className="text">Support Request</p>
+                                                        <p className="text">05:35 PM</p>
                                                         <hr/>
                                                         <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
                                                     </div>
