@@ -35,7 +35,9 @@ hr{
 :focus,:visited,:active{
     outline: none;
 }
-
+p,h1,h2,h3,h4,h5,h6,a,span,label,input,th,td{
+    font-family: 'Mulish', sans-serif !important;
+}
 
 
 
@@ -191,7 +193,7 @@ hr{
 #loginSection .formContent label a{
     float: right;
     color: #291843;
-    font-weight: 500;
+    font-weight: 700;
     cursor: pointer;
 }
 #loginSection .formContent input{
@@ -202,7 +204,7 @@ hr{
 }
 #loginSection .formContent label {
     width: 100%;
-    
+    font-weight: 700;
 }
 #loginSection .formContent .btnDiv{
     margin-top: 20px;
@@ -225,6 +227,19 @@ hr{
     top: 16px;
     color: gray;
 }
+#loginSection .formContent .goBackText{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 17px;
+}
+#loginSection .formContent .goBackText a{
+    font-weight: 800;
+    color: darkgray;
+}
+#loginSection .formContent .goBackText svg{
+    color: darkgray;
+    margin-right: 9px;
+}
 /****************** DashBoard ***********/
 #dashBoard .sideNav{
     top: 0;
@@ -243,6 +258,9 @@ hr{
 #dashBoard .sideNav .listDiv .nav-pills li{
     margin-bottom: 0px !important;
 }
+#dashBoard .sideNav .listDiv .nav-pills li a>svg{
+    margin-right: 20px;
+}
 #dashBoard .sideNav .listDiv .nav-pills{
     padding-left: 20px;
 }
@@ -253,7 +271,7 @@ hr{
 }
 #dashBoard .navbar-inverse .navbar-brand,#dashBoard .navbar-right a{
     color: #291843;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 14px;
 }
 #dashBoard .sideNavContent .logoDiv{
@@ -326,6 +344,7 @@ hr{
     padding: 10px;
     font-size: 17px;
     padding-top: 0px;
+    font-weight: 500;
 }
 #dashBoard .main-filter .selectDiv label{
     font-size: 17px;
@@ -349,10 +368,15 @@ hr{
 }
 #dashBoard .room-details .roomCard h3{
     margin-top: 0px;
+    font-weight: 700;
 }
 #dashBoard .roomDetail{
     padding-left: 20px;
     border-radius: 5px 0px 107px 6px;
+}
+#dashBoard .roomDetail p.text{
+    margin-bottom: 5px;
+    opacity: 0.75;
 }
 #dashBoard .roomDetail hr{
     margin: 5px;
@@ -362,11 +386,11 @@ hr{
 }
 #dashBoard .main-content #history h3 {
     margin-top: 45px;
-    font-weight: 400;
+    font-weight: 700;
 }
-#dashBoard .main-content #offices h3 {
+#dashBoard .main-content #offices h3,#user h3 {
     margin-top: 23px;
-    font-weight: 400;
+    font-weight: 600;
 }
 #dashBoard .main-content #offices .office-btn-div{
     float: right;
@@ -463,11 +487,10 @@ hr{
     margin-top: 30px;
 }
 .modal-body .formDiv label,.edit-profile-div label{
-    font-weight: 300;
+    font-weight: 600;
 }
 .about-company label{
-    font-weight: 300;
-    margin-top: 20px;
+    font-weight: 600;
 }
 .modal-body .formDiv input,.edit-profile-div input,.about-company input{
     border: none;
@@ -543,7 +566,7 @@ button.close:focus{
 }
 #dashBoard .main-content #setting h3 {
     margin-top: 44px;
-    font-weight: 400;
+    font-weight: 600;
 }
 #dashBoard .main-content #setting .profile-image-div{
     margin-top: 30px;
@@ -563,6 +586,7 @@ button.close:focus{
     padding: 10px 20px;
     border-radius: 5px;
     color: #15d1a5;
+    font-weight: 800 !important;
 }
 .edit-profile-div,.about-company{
     margin-top: 40px;
@@ -619,7 +643,7 @@ button.close:focus{
     color: gray;
 }
 #dashBoard .main-content #button-services h3{
-    font-weight: 400;
+    font-weight: 600;
 }
 #dashBoard .main-content #button-services .new-button-service,#user .new-user{
     float: right;

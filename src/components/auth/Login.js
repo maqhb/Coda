@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
+import {Link} from 'react-router-dom';
 import '../../styles/style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye,faBackward } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const Login = () =>{
@@ -38,8 +39,13 @@ return(
                                         </div>
                                     </div> 
                                     :
+                                    <div>
                                     <div className="btnDiv" onClick={toggleForgetSection}>
                                         <a>Send Email</a>
+                                    </div>
+                                        <p onClick={toggleForgetSection} className="goBackText"><FontAwesomeIcon icon={faBackward}/>
+                                            <a>Go Back</a>
+                                        </p>
                                     </div>
                                     
                                 }
