@@ -58,6 +58,11 @@ crossorigin="anonymous"></script>
   connectWith: ".connected-sortable",
   stack: ".connected-sortable ul"
 }).disableSelection();
+$('html').click(function() {
+  if($(".office-dropDown").css('display')==="block"){
+    $(".office-dropDown").css('display','none');
+  }
+});
 });
 </script>
 </html>
