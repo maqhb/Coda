@@ -231,6 +231,7 @@ p,h1,h2,h3,h4,h5,h6,a,span,label,input,th,td{
     margin-top: 20px;
     text-align: center;
     font-size: 17px;
+    cursor: pointer;
 }
 #loginSection .formContent .goBackText a{
     font-weight: 800;
@@ -415,6 +416,9 @@ p,h1,h2,h3,h4,h5,h6,a,span,label,input,th,td{
 }
 #dashBoard .main-content #offices .new-offices-div {
     margin-top: 25px;
+}
+.new-offices-div .col-lg-3:last-child .office-dropDown{
+   right: 0px !important;
 }
 #dashBoard .main-content #offices .new-offices-div .offceDiv{
     box-shadow: 0px 6px 15px 0px #afafaf;
@@ -1018,8 +1022,17 @@ button.close:focus{
         margin-right: 2px;
     }
 }
+@media (min-width:992px) and (max-width:1200px)
+{
+    .new-offices-div .col-lg-3:nth-child(3) .office-dropDown{
+        right: 0px !important;
+     }
+}
 @media(max-width:992px)
 {
+    .new-offices-div .col-lg-3:nth-child(2) .office-dropDown{
+        right: 0px !important;
+     }
     #office_Drag_Drop .btnDiv {
         max-width: 100%;
     }
@@ -1090,6 +1103,10 @@ button.close:focus{
 }
 @media(max-width:768px)
 {
+    .new-offices-div .col-lg-3 .office-dropDown{
+        right: 50px !important;
+        top: 85px !important;
+     }
     #button-services .modal-dialog {
         max-width: 100%;
     }
