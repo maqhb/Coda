@@ -438,7 +438,7 @@ const DashBoard = () =>{
                                         <div className="container-fluid">
                                             <div className="row">
                                             {newOffice.map((item,index)=>(
-                                                <div className="col-lg-3 col-md-3 col-sm-6">
+                                                <div className="col-lg-3 col-md-4 col-sm-6">
                                                     <div className="offceDiv">
                                                         <div className="more-btn-img">
                                                             <img src={office}/>
@@ -448,6 +448,7 @@ const DashBoard = () =>{
                                                                     <div className="office-dropDown">
                                                                     <p type="button" data-toggle="modal" data-target="#QRCode"><a>View QR Code</a></p>
                                                                     <p><a>Edit Room</a></p>
+                                                                    <p><a>Delete Room</a></p>
                                                                 </div>
                                                                 }
                                                         </div>
