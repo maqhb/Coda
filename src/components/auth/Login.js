@@ -3,11 +3,14 @@ import {Link} from 'react-router-dom';
 import '../../styles/style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye,faBackward } from "@fortawesome/free-solid-svg-icons";
+import Axios from 'axios';
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const Login = () =>{
     
 const [password,setPassword]=useState(false);
+const [email, setEmail] = useState('');
+const [pwd, setPwd] = useState('');
 const [forget,setForget]=useState(false);
 const togglePasswordVisiblity = () => {
     setPassword(password ? false : true);
@@ -15,6 +18,26 @@ const togglePasswordVisiblity = () => {
 const toggleForgetSection = () => {
     setForget(forget ? false : true);
 };
+
+const LoginButton = () => {
+    const handleSubmit = (e) => { 
+        e.preventDefault();
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/mia-auth/login?email="+email+"&password="+pwd).then((response)=>{
+        if(response.data.success){
+            console.log(response.data.response.access_token.access_token)
+              window.location.href = "/dashboard"
+            }
+            else{
+                alert("Wrong Username or Password")
+            }
+          }).catch((error)=>{
+            alert(error)
+          })
+    }
+  
+    return <div className="btnDiv" onClick={handleSubmit}>LOGIN</div>;
+  };
+
 return(
         <section id="loginSection">
             <div className="container-fluid">
@@ -26,17 +49,15 @@ return(
                        }
                         <form>
                                 <label>Email Address</label>
-                                <input placeholder="yourEmail@compnay.com"></input>
+                                <input type="email" placeholder="username@company.com" onChange={event => setEmail(event.target.value)}></input>
                                 {!forget ?
                                     <div>
-                                        <label>Email Address <a onClick={toggleForgetSection}>Forget Password?</a></label>
+                                        <label>Password <a onClick={toggleForgetSection}>Forget Password?</a></label>
                                         <div className="inputPassword">
-                                            <input placeholder="Password"  type={password ? "text" : "password"}></input>
+                                            <input placeholder="Password" onChange={event => setPwd(event.target.value)}  type={password ? "text" : "password"}></input>
                                             <i onClick={togglePasswordVisiblity}>{eye}</i>
                                         </div>
-                                        <div className="btnDiv">
-                                            <a href="">LOGIN</a>
-                                        </div>
+                                        <LoginButton/>
                                     </div> 
                                     :
                                     <div>

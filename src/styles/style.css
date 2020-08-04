@@ -164,7 +164,7 @@ p,h1,h2,h3,h4,h5,h6,a,span,label,input,th,td{
     padding: 150px 55px 55px 55px;
 }
 #loginSection .imageDiv{
-    background-image: url('G:/Office Work/WebCreative/React/Projects/Coda/coda-project/src/assets/loginPage/login.jpg');
+    background-image: url('../assets/loginPage/login.jpg');
     width: calc(100% - 700px);
     background-repeat: no-repeat;
     background-size: cover;
