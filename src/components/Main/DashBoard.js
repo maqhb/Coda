@@ -21,6 +21,7 @@ const DashBoard = () =>{
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
+        {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
         {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"}
     ])
     const[newButton,setNewButton]=useState([
