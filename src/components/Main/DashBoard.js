@@ -10,6 +10,7 @@ import more from '../../assets/dashboard/more.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faHistory,faUsers,faCog,faEdit,faBuilding,faTimes,faCamera,faEye,faTrash,faPen,faPlus } from "@fortawesome/free-solid-svg-icons";
 
+import Rooms from "./Rooms"
 
 const DashBoard = () =>{
     const [isShow,setIsShow]=useState({
@@ -17,12 +18,7 @@ const DashBoard = () =>{
         flag:false,
         index:null
     })
-    const[newOffice,setNewOffice]=useState([
-        {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
-        {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
-        {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"},
-        {roomNo:"Room#5",user:"15 users",request:"12 support request",address:"Wall Street 123, California"}
-    ])
+    const[newOffice,setNewOffice]=useState()
     const[newButton,setNewButton]=useState([
         {BtnText:"ACTION #7",BtnColor:"#15d1a5"},
         {BtnText:"ACTION #8",BtnColor:"#f0ad4e"},
@@ -58,7 +54,7 @@ const DashBoard = () =>{
         const request=document.getElementById('request').value;
         if(officeName!="" && location!="" && request!=""){
             const newObj={'roomNo':officeName,'user':'15 users','request':request,'address':location};
-            setNewOffice(state=>[...state,newObj]);
+            //setNewOffice(state=>[...state,newObj]);
         }
     }
     const newMakeButton = () =>{
@@ -434,36 +430,7 @@ const DashBoard = () =>{
                                         </div>
                                     </div>
                                     
-                                    <div className="new-offices-div">
-                                        <div className="container-fluid">
-                                            <div className="row">
-                                            {newOffice.map((item,index)=>(
-                                                <div className="col-lg-3 col-md-4 col-sm-6">
-                                                    <div className="offceDiv">
-                                                        <div className="more-btn-img">
-                                                            <img src={office}/>
-                                                            <img className="moreImg" src={more} onClick={()=>openMenuItem(item,index)}/>
-                                                                {
-                                                                    isShow.flag && isShow.index===index&&
-                                                                    <div className="office-dropDown">
-                                                                    <p type="button" data-toggle="modal" data-target="#QRCode"><a>View QR Code</a></p>
-                                                                    <p><a>Edit Room</a></p>
-                                                                    <p><a>Delete Room</a></p>
-                                                                </div>
-                                                                }
-                                                        </div>
-                                                        <div className="conatentDiv" onClick={openScreenOffice}>
-                                                            <h4>{item.roomNo}</h4>
-                                                            <p>{item.user}</p>
-                                                            <p>{item.request}</p>
-                                                            <p>{item.address}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <Rooms/>
                                     <div id="QRCode" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
