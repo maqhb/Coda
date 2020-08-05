@@ -8,30 +8,28 @@ class History extends Component{
         super(props)
         this.state = {
             history : null,
-            page: 1,
+            page: 0,
+            itemNum:0
         }
         this.getHistory = this.getHistory.bind(this)
         this.itemNo=0
     }
 
     componentDidMount() {
-        this.getHistory()
-    }
-
-    componentDidUpdate(prevProps,prevState){
-        if(prevState.page != this.state.page){
-        this.getHistory()
+        if(this.state.page === 0){
+            this.getHistory()
         }
     }
 
+
     getHistory(){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/request/list?access_token=bdefdf3844982f3b0dd99c76d0e526489901e657&page="+this.state.page).then((response)=>{
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/request/list?access_token=bdefdf3844982f3b0dd99c76d0e526489901e657&page="+(this.state.page+1)).then((response)=>{
             if(response.data.success){
                 this.setState({
                     history : response.data.response.data,
+                    page:this.state.page+1,
+                    itemNum : response.data.response.from-1
                 })
-                console.log(response.data.response.data)
-                this.itemNo = response.data.response.from;
             }
             else{
                 alert("Wrong Username or Password")
@@ -41,6 +39,7 @@ class History extends Component{
         })
     }
     render() {
+
         if(this.state.history === null){
             return (
                <>
@@ -48,6 +47,8 @@ class History extends Component{
             )
         }
         else{
+            this.itemNo = this.state.itemNum
+            console.log(this.itemNo)
               return(
                 <div id="history" className="tab-pane fade">
                 <h3>Historical Support Request</h3>
@@ -75,8 +76,8 @@ class History extends Component{
                                 <tbody>
                                 {this.state.history.map((item,index)=>(
                                     <tr key={index}>
-                                        <td>{this.itemNo=this.itemNo+1}</td>
-                                        
+                                        <td>{this.itemNo = this.itemNo+1}</td>
+
                                         <td>
                                 <h4>Room {item.room_id}</h4>
                                 <p>at {item.date_arrive}</p>
@@ -117,7 +118,7 @@ class History extends Component{
                                                             <div className="arrowsDiv">
                                                                 <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                                                                 <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                                                <i class="fa fa-angle-right" aria-hidden="true" onClick={()=>{this.setState({page: this.state.page+1})}}></i>
+                                                                <i class="fa fa-angle-right" aria-hidden="true" onClick={this.getHistory}></i>
                                                                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                                             </div>
                                                         </div>
