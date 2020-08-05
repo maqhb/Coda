@@ -15,6 +15,7 @@ class Rooms extends Component{
             index:null
         }
         this.getRooms = this.getRooms.bind(this)
+        this.deleteRooms = this.deleteRooms.bind(this)
         this.openMenuItem = this.openMenuItem.bind(this)
         this.openScreenOffice = this.openScreenOffice.bind(this)
     }
@@ -44,7 +45,7 @@ class Rooms extends Component{
     }
 
     getRooms(){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/list?access_token=bdefdf3844982f3b0dd99c76d0e526489901e657").then((response)=>{
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/list?asc=1&access_token=bdefdf3844982f3b0dd99c76d0e526489901e657").then((response)=>{
             if(response.data.success){
                 this.setState({
                     newOffice : response.data.response.data
@@ -57,6 +58,22 @@ class Rooms extends Component{
             alert(error)
         })
     }
+
+    deleteRooms(){
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/remove?access_token=bdefdf3844982f3b0dd99c76d0e526489901e657").then((response)=>{
+            if(response.data.success){
+                this.setState({
+                    newOffice : response.data.response.data
+                })
+            }
+            else{
+                alert("Wrong Username or Password")
+            }
+        }).catch((error)=>{
+            alert(error)
+        })
+    }
+
     render() {
         if(this.state.newOffice === null){
             return (
@@ -66,40 +83,7 @@ class Rooms extends Component{
                             <div className="col-lg-3 col-md-6">
                                 <div className="roomCard">
                                     <div className="roomDetail y-l-b">
-                                        <h3>Room 3</h3>
-                                        <p className="text">Support Request</p>
-                                        <p className="text">05:35 PM</p>
-                                        <hr/>
-                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-3 col-md-6">
-                                <div className="roomCard">
-                                    <div className="roomDetail b-l-b">
-                                        <h3>Room 3</h3>
-                                        <p className="text">Support Request</p>
-                                        <p className="text">05:35 PM</p>
-                                        <hr/>
-                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-3 col-md-6">
-                                <div className="roomCard">
-                                    <div className="roomDetail g-l-b">
-                                        <h3>Room 3</h3>
-                                        <p className="text">Support Request</p>
-                                        <p className="text">05:35 PM</p>
-                                        <hr/>
-                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-lg-3 col-md-6">
-                                <div className="roomCard">
-                                    <div className="roomDetail r-l-b">
-                                        <h3>Room 3</h3>
+                                        <h3>Room </h3>
                                         <p className="text">Support Request</p>
                                         <p className="text">05:35 PM</p>
                                         <hr/>
@@ -128,7 +112,7 @@ class Rooms extends Component{
                                                   <div className="office-dropDown">
                                                       <p type="button" data-toggle="modal" data-target="#QRCode"><a>View QR Code</a></p>
                                                       <p><a>Edit Room</a></p>
-                                                      <p><a>Delete Room</a></p>
+                                                      <p><a onClick={()=>{alert("hello")}}>Delete Room</a></p>
                                                   </div>
                                               }
                                           </div>
