@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Axios from "axios";
 import '../../styles/style.css';
+import Cookies from "js-cookie";
 
 
 class History extends Component{
@@ -23,7 +24,7 @@ class History extends Component{
 
 
     getHistory(){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/request/list?access_token=bdefdf3844982f3b0dd99c76d0e526489901e657&page="+(this.state.page+1)).then((response)=>{
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/request/list?access_token="+Cookies.get("token")+"&page="+(this.state.page+1)).then((response)=>{
             if(response.data.success){
                 this.setState({
                     history : response.data.response.data,
