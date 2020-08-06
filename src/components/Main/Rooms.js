@@ -3,6 +3,7 @@ import Axios from "axios";
 import '../../styles/style.css';
 import office from "../../assets/dashboard/office.jpg";
 import more from "../../assets/dashboard/more.png";
+import Cookies from 'js-cookie'
 
 
 class Rooms extends Component{
@@ -45,7 +46,7 @@ class Rooms extends Component{
     }
 
     getRooms(){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/list?asc=1&access_token=bdefdf3844982f3b0dd99c76d0e526489901e657").then((response)=>{
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/list?asc=1&access_token="+Cookies.get("token")).then((response)=>{
             if(response.data.success){
                 this.setState({
                     newOffice : response.data.response.data
@@ -59,15 +60,15 @@ class Rooms extends Component{
         })
     }
 
-    deleteRooms(){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/remove?access_token=bdefdf3844982f3b0dd99c76d0e526489901e657").then((response)=>{
+    deleteRooms(event){
+        event.preventDefault()
+        let roomId = event.currentTarget.id
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/remove?access_token="+Cookies.get("token")+"&id="+roomId).then((response)=>{
             if(response.data.success){
-                this.setState({
-                    newOffice : response.data.response.data
-                })
+                this.getRooms()
             }
             else{
-                alert("Wrong Username or Password")
+                alert("Failed to delete room")
             }
         }).catch((error)=>{
             alert(error)
@@ -105,14 +106,14 @@ class Rooms extends Component{
                                   <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
                                       <div className="offceDiv">
                                           <div className="more-btn-img">
-                                              <img src={office}/>
+                                              <img src={(item.photo === null || item.photo === "")?office:item.photo}/>
                                               <img className="moreImg" src={more} onClick={()=>this.openMenuItem(item,index)}/>
                                               {
                                                   this.state.flag && this.state.index===index&&
                                                   <div className="office-dropDown">
                                                       <p type="button" data-toggle="modal" data-target="#QRCode"><a>View QR Code</a></p>
                                                       <p><a>Edit Room</a></p>
-                                                      <p><a onClick={()=>{alert("hello")}}>Delete Room</a></p>
+                                                      <p ><a id={item.id} onClick={this.deleteRooms}>{}Delete Room</a></p>
                                                   </div>
                                               }
                                           </div>
@@ -121,6 +122,7 @@ class Rooms extends Component{
                                               <p>{item.created_at}</p>
                                               <p>{item.updated_at}</p>
                                               <p>{item.address}</p>
+                                              <p>{(item.deleted === 1)?"Room deleted":""}</p>
                                           </div>
                                       </div>
                                   </div>

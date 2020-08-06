@@ -4,6 +4,7 @@ import '../../styles/style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye,faBackward } from "@fortawesome/free-solid-svg-icons";
 import Axios from 'axios';
+import Cookies from 'js-cookie'
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const Login = () =>{
@@ -24,7 +25,7 @@ const LoginButton = () => {
         e.preventDefault();
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/mia-auth/login?email="+email+"&password="+pwd).then((response)=>{
         if(response.data.success){
-            console.log(response.data.response.access_token.access_token)
+            Cookies.set("token", response.data.response.access_token.access_token, { sameSite: 'strict'})
               window.location.href = "/dashboard"
             }
             else{
