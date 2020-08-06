@@ -9,7 +9,6 @@ import Cookies from 'js-cookie'
 class Rooms extends Component{
     constructor(props){
         super(props)
-        this.getRooms = this.getRooms.bind(this)
         this.state = {
             newOffice : null,
             flag: false,

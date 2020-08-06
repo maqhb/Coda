@@ -5,12 +5,11 @@ import profile from '../../assets/dashboard/userProfile.PNG';
 import avatar from '../../assets/dashboard/avatar.png';
 import userTable from '../../assets/dashboard/userTable.png';
 import QR from '../../assets/dashboard/qr.png';
-import office from '../../assets/dashboard/office.jpg';
-import more from '../../assets/dashboard/more.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faHistory,faUsers,faCog,faEdit,faBuilding,faTimes,faCamera,faEye,faTrash,faPen,faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import Rooms from "./Rooms"
+import History from "./History"
 
 const DashBoard = () =>{
     const [isShow,setIsShow]=useState({
@@ -18,7 +17,6 @@ const DashBoard = () =>{
         flag:false,
         index:null
     })
-    const[newOffice,setNewOffice]=useState()
     const[newButton,setNewButton]=useState([
         {BtnText:"ACTION #7",BtnColor:"#15d1a5"},
         {BtnText:"ACTION #8",BtnColor:"#f0ad4e"},
@@ -40,14 +38,7 @@ const DashBoard = () =>{
             
         }
     }
-    const openMenuItem =(item,index)=>{
-        if(isShow.index===index){
-            setIsShow({...isShow,flag:false,card:null,index:null})
-        }
-        else{
-            setIsShow({...isShow,flag:true,card:item,index});
-        }
-    }
+    
     const submitForm = () =>{
         const officeName=document.getElementById('office-name').value;
         const location=document.getElementById('location').value;
@@ -127,6 +118,7 @@ const DashBoard = () =>{
                                 </div>
                             </nav>
                         </div>
+                        
                         <div className="tab-content">
                             <div id="home" className="tab-pane fade in active">
                                 <div className="main-filter">
@@ -207,146 +199,7 @@ const DashBoard = () =>{
                                     </div>
                                 </div>
                             </div>
-                            <div id="history" className="tab-pane fade">
-                                <h3>Historical Support Request</h3>
-                                <div className="search-Bar">
-                                    <div className="row">
-                                        <div className="col-lg-12">
-                                            <input placeholder="Search User"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="table-Div">
-                                        <div className="container-fluid p-0">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>Support Request</th>
-                                                    <th>Accept By</th>
-                                                    <th>Complete At</th>
-                                                    <th>Duration In Room</th>
-                                                    <th>Duration on the Way</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <h4>Room #5</h4>
-                                                            <p>at 05:35 PM</p>
-                                                        </td>
-                                                        <td>
-                                                            <h4>Martin Camiletti</h4>
-                                                            <p>at 05:40 PM</p>
-                                                        </td>
-                                                        <td>05:44 PM</td>
-                                                        <td>05:15 minutes</td>
-                                                        <td>
-                                                            0:15 second
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <h4>Room #5</h4>
-                                                            <p>at 05:35 PM</p>
-                                                        </td>
-                                                        <td>
-                                                            <h4>Martin Camiletti</h4>
-                                                            <p>at 05:40 PM</p>
-                                                        </td>
-                                                        <td>05:44 PM</td>
-                                                        <td>05:15 minutes</td>
-                                                        <td>
-                                                            0:15 second
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <h4>Room #5</h4>
-                                                            <p>at 05:35 PM</p>
-                                                        </td>
-                                                        <td>
-                                                            <h4>Martin Camiletti</h4>
-                                                            <p>at 05:40 PM</p>
-                                                        </td>
-                                                        <td>05:44 PM</td>
-                                                        <td>05:15 minutes</td>
-                                                        <td>
-                                                            0:15 second
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <h4>Room #5</h4>
-                                                            <p>at 05:35 PM</p>
-                                                        </td>
-                                                        <td>
-                                                            <h4>Martin Camiletti</h4>
-                                                            <p>at 05:40 PM</p>
-                                                        </td>
-                                                        <td>05:44 PM</td>
-                                                        <td>05:15 minutes</td>
-                                                        <td>
-                                                            0:15 second
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <h4>Room #5</h4>
-                                                            <p>at 05:35 PM</p>
-                                                        </td>
-                                                        <td>
-                                                            <h4>Martin Camiletti</h4>
-                                                            <p>at 05:40 PM</p>
-                                                        </td>
-                                                        <td>05:44 PM</td>
-                                                        <td>05:15 minutes</td>
-                                                        <td>
-                                                            0:15 second
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                 
-                                            </table>
-                                            </div>
-                                            <div className="table-footer">
-                                                <div className="container-fluid">
-                                                            <div className="row">
-                                                                <div className="col-lg-12">
-                                                                    <div className="multipleDiv">
-                                                                            <div className="item-per-page">
-                                                                                <label>Item per page:</label>
-                                                                                <select>
-                                                                                    <option>1</option>
-                                                                                    <option>2</option>
-                                                                                    <option>3</option>
-                                                                                    <option>4</option>
-                                                                                    <option>5</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div className="paginationText">
-                                                                                <p>1-5 of 20</p>
-                                                                            </div>
-                                                                            <div className="arrowsDiv">
-                                                                                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-                                                                                <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                                                            </div>
-                                                                        </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                        </div>
-                                    </div>
-                            </div>
+                            <History/>
                             <div id="offices" className="tab-pane fade">
                                 <div id="office-main-screen">
                                     <div class="modal fade" id="myModal" role="dialog">
