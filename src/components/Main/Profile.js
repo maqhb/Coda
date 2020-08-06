@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Axios from "axios";
+import profile from '../../assets/dashboard/userProfile.PNG';
 import '../../styles/style.css';
 
 
@@ -23,7 +23,9 @@ class Profile extends Component{
             )
         }
         else{
-            
+            if(this.state.photo==''){
+                this.setState({photo: profile});
+            }
               return(
                 <div className="profileImgdiv">
                                 <h3 className="c-w f-300">Welcome {this.state.firstname}!</h3>

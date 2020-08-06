@@ -1,7 +1,6 @@
 import React,{useState} from 'react';
 import '../../styles/style.css';
 import logo from '../../assets/dashboard/logo.PNG';
-import profile from '../../assets/dashboard/userProfile.PNG';
 import avatar from '../../assets/dashboard/avatar.png';
 import userTable from '../../assets/dashboard/userTable.png';
 import QR from '../../assets/dashboard/qr.png';
