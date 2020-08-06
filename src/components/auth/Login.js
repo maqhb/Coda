@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,Redirect} from 'react-router-dom';
 import '../../styles/style.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye,faBackward } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +13,8 @@ const [password,setPassword]=useState(false);
 const [email, setEmail] = useState('');
 const [pwd, setPwd] = useState('');
 const [forget,setForget]=useState(false);
+const [firstname,setFirstname]=useState(null);
+const [photo,setPhoto]=useState(null);
 const togglePasswordVisiblity = () => {
     setPassword(password ? false : true);
   };
@@ -20,13 +22,18 @@ const toggleForgetSection = () => {
     setForget(forget ? false : true);
 };
 
+const [Success,setSuccess] = useState(false)
+
 const LoginButton = () => {
     const handleSubmit = (e) => { 
         e.preventDefault();
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/mia-auth/login?email="+email+"&password="+pwd).then((response)=>{
         if(response.data.success){
-            Cookies.set("token", response.data.response.access_token.access_token, { sameSite: 'strict'})
-              window.location.href = "/dashboard"
+              Cookies.set("token", response.data.response.access_token.access_token, { sameSite: 'strict'})
+              alert(response.data.response.user.firstname)
+              setFirstname(response.data.response.user.firstname)
+              setPhoto(response.data.response.user.photo)
+              setSuccess(true)
             }
             else{
                 alert("Wrong Username or Password")
@@ -39,8 +46,12 @@ const LoginButton = () => {
     return <div className="btnDiv" onClick={handleSubmit}>LOGIN</div>;
   };
 
+
+
 return(
-        <section id="loginSection">
+    <>
+    
+            <section id="loginSection">
             <div className="container-fluid">
                 <div className="wrapImageFrom">
                     <div className="formDiv">
@@ -80,6 +91,9 @@ return(
                 </div>
             </div>
         </section>
+    
+        {Success && <Redirect to={{pathname: '/dashboard', state: {firstname: firstname,photo: photo}}} />}
+        </>
     )
 }
 export default Login;

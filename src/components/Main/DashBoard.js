@@ -8,10 +8,11 @@ import QR from '../../assets/dashboard/qr.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faHistory,faUsers,faCog,faEdit,faBuilding,faTimes,faCamera,faEye,faTrash,faPen,faPlus } from "@fortawesome/free-solid-svg-icons";
 
+import Profile from "./Profile"
 import Rooms from "./Rooms"
 import History from "./History"
 
-const DashBoard = () =>{
+const DashBoard = (props) =>{
     const [isShow,setIsShow]=useState({
         card:null,
         flag:false,
@@ -82,10 +83,7 @@ const DashBoard = () =>{
                                 <img src={logo} className="img-responsive"/>
                                 <a className="closeBtn" onClick={openMenu}><FontAwesomeIcon icon={faTimes} /></a>
                             </div>
-                            <div className="profileImgdiv">
-                                <h3 className="c-w f-300">Welcome Gordon!</h3>
-                                <img src={profile} className="img-responsive"/>
-                            </div>
+                            <Profile firstname={props.location.state.firstname} photo={props.location.state.photo} />
                             <div className="listDiv">
                                 <ul className="nav nav-pills nav-stacked">
                                     <li className="active"><a data-toggle="pill" href="#home"><FontAwesomeIcon icon={faHome} /> DashBoard</a></li>
@@ -98,6 +96,7 @@ const DashBoard = () =>{
                             </div>
                         </div>
                     </div>
+                    
                    <div className="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
                           <div className="main-navbar sticky-top bg-white">
                             <nav className="navbar navbar-inverse">
