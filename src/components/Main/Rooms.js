@@ -52,7 +52,7 @@ class Rooms extends Component{
                 })
             }
             else{
-                alert("Wrong Username or Password")
+                alert("Failed to get Rooms")
             }
         }).catch((error)=>{
             alert(error)
