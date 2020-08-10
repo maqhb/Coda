@@ -14,19 +14,6 @@ import MainDashboard from "./MainDashboard";
 import Actions from "./Actions";
 
 const DashBoard = (props) =>{
-<<<<<<< HEAD
-    const [isShow,setIsShow]=useState({
-        card:null,
-        flag:false,
-        index:null
-    })
-    const[newButton,setNewButton]=useState([
-        {BtnText:"ACTION #7",BtnColor:"#15d1a5"},
-        {BtnText:"ACTION #8",BtnColor:"#f0ad4e"},
-        {BtnText:"ACTION #9",BtnColor:"#d9534f"}
-    ])
-=======
->>>>>>> abdul-dev
     const openMenu = () =>{
         if(document.getElementsByClassName('sideNav')[0].style.display=="block")
         {
