@@ -30,7 +30,6 @@ const LoginButton = () => {
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/mia-auth/login?email="+email+"&password="+pwd).then((response)=>{
         if(response.data.success){
               Cookies.set("token", response.data.response.access_token.access_token, { sameSite: 'strict'})
-              alert(response.data.response.user.firstname)
               setFirstname(response.data.response.user.firstname)
               setPhoto(response.data.response.user.photo)
               setSuccess(true)
