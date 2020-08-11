@@ -90,11 +90,11 @@ const DashBoard = (props) =>{
                                     </button>
                                     <a className="navbar-brand" href="#">Stockely Park</a>
                                     </div>
-                                    <div className="collapse navbar-collapse" id="myNavbar">
+                                    {/* <div className="collapse navbar-collapse" id="myNavbar">
                                     <ul className="nav navbar-nav navbar-right">
                                         <li><a href="#">Login</a></li>
                                     </ul>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </nav>
                         </div>
