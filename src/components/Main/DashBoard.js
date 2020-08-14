@@ -10,10 +10,18 @@ import { faHome,faHistory,faUsers,faCog,faEdit,faBuilding,faTimes,faCamera,faEye
 import Profile from "./Profile"
 import Rooms from "./Rooms"
 import History from "./History"
-import MainDashboard from "./MainDashboard";
-import Actions from "./Actions";
 
 const DashBoard = (props) =>{
+    const [isShow,setIsShow]=useState({
+        card:null,
+        flag:false,
+        index:null
+    })
+    const[newButton,setNewButton]=useState([
+        {BtnText:"ACTION #7",BtnColor:"#15d1a5"},
+        {BtnText:"ACTION #8",BtnColor:"#f0ad4e"},
+        {BtnText:"ACTION #9",BtnColor:"#d9534f"}
+    ])
     const openMenu = () =>{
         if(document.getElementsByClassName('sideNav')[0].style.display=="block")
         {
@@ -39,6 +47,16 @@ const DashBoard = (props) =>{
             const newObj={'roomNo':officeName,'user':'15 users','request':request,'address':location};
             //setNewOffice(state=>[...state,newObj]);
         }
+    }
+    const newMakeButton = () =>{
+        const btnName=document.getElementById('btn-name').value;
+        const btnIndex=document.getElementById("colors").selectedIndex;
+        var btnOption = document.getElementById("colors").options
+        if(btnName!=""){
+            const newObj={'BtnText':btnName,'BtnColor':btnOption[btnIndex].text};
+            setNewButton(state=>[...state,newObj]);
+        }
+        console.log(newButton.index);
     }
     const [password,setPassword]=useState(false);
     const togglePasswordVisiblity = () => {
@@ -67,7 +85,7 @@ const DashBoard = (props) =>{
                             <Profile firstname={props.location.state.firstname} photo={props.location.state.photo} />
                             <div className="listDiv">
                                 <ul className="nav nav-pills nav-stacked">
-                                    <li className="active"><a data-toggle="pill" href="#home"><FontAwesomeIcon icon={faHome} /> Dashboard</a></li>
+                                    <li className="active"><a data-toggle="pill" href="#home"><FontAwesomeIcon icon={faHome} /> DashBoard</a></li>
                                     <li><a data-toggle="pill" href="#history"><FontAwesomeIcon icon={faHistory} /> History Request</a></li>
                                     <li><a data-toggle="pill" href="#offices"><FontAwesomeIcon icon={faBuilding} /> Offices</a></li>
                                     <li><a data-toggle="pill" href="#user"><FontAwesomeIcon icon={faUsers} /> User</a></li>
@@ -90,11 +108,11 @@ const DashBoard = (props) =>{
                                     </button>
                                     <a className="navbar-brand" href="#">Stockely Park</a>
                                     </div>
-                                    {/* <div className="collapse navbar-collapse" id="myNavbar">
+                                    <div className="collapse navbar-collapse" id="myNavbar">
                                     <ul className="nav navbar-nav navbar-right">
                                         <li><a href="#">Login</a></li>
                                     </ul>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </nav>
                         </div>
@@ -128,7 +146,56 @@ const DashBoard = (props) =>{
                                     </div>
                                 </div>
                             </div>
-                            <MainDashboard/>
+                                <div className="room-details">
+                                    <div className="container-fluid">
+                                        <div className="row">
+                                            <div className="col-lg-3 col-md-6">
+                                                <div className="roomCard">
+                                                    <div className="roomDetail y-l-b">
+                                                        <h3>Room 3</h3>
+                                                        <p className="text">Support Request</p>
+                                                        <p className="text">05:35 PM</p>
+                                                        <hr/>
+                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-3 col-md-6">
+                                                <div className="roomCard">
+                                                    <div className="roomDetail b-l-b">
+                                                        <h3>Room 3</h3>
+                                                        <p className="text">Support Request</p>
+                                                        <p className="text">05:35 PM</p>
+                                                        <hr/>
+                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-3 col-md-6">
+                                                <div className="roomCard">
+                                                    <div className="roomDetail g-l-b">
+                                                        <h3>Room 3</h3>
+                                                        <p className="text">Support Request</p>
+                                                        <p className="text">05:35 PM</p>
+                                                        <hr/>
+                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-3 col-md-6">
+                                                <div className="roomCard">
+                                                    <div className="roomDetail r-l-b">
+                                                        <h3>Room 3</h3>
+                                                        <p className="text">Support Request</p>
+                                                        <p className="text">05:35 PM</p>
+                                                        <hr/>
+                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <History/>
                             <div id="offices" className="tab-pane fade">
@@ -562,7 +629,107 @@ const DashBoard = (props) =>{
                                     </div>
                                 </div>
                             </div>
-                            <Actions/>
+                            <div id="button-services" className="tab-pane fade">
+                            <div class="modal fade" id="buttonModal" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">New Button Service</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
+                                            <div className="formDiv">
+                                                <div className="container-fluid">
+                                                    <div className="row">
+                                                        <div className="col-lg-12">
+                                                        <div class="input-group">
+                                                            <input type="text" required id="btn-name"/>
+                                                            <span class="highlight"></span>
+                                                            <span class="bar"></span>
+                                                            <label>Name</label>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row m-t-20">
+                                                        <div className="col-lg-12">
+                                                            <div class="input-group">
+                                                            
+                                                            <select id="colors">
+                                                                <option>#15d1a5</option>
+                                                                <option>#f0ad4e</option>
+                                                                <option>#d9534f</option>
+                                                            </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row m-t-20">
+                                                        <div className="col-lg-12">
+                                                            <div class="input-group">
+                                                                <input type="text" required/>
+                                                                <span class="highlight"></span>
+                                                                <span class="bar"></span>
+                                                                <label>Description</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">CANCEL</button>
+                                        <button type="button" class="btn btn-default createRoomBtn" data-dismiss="modal" onClick={newMakeButton}>SAVE</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-lg-6 col-md-6 col-sm-6">
+                                            <h3>Button Services</h3>
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6">
+                                            <div className="new-button-service">
+                                                <span type="button"  data-toggle="modal" data-target="#buttonModal" className="modalBtn"> 
+                                                    <a>NEW BUTTON SERVICE</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="button-services-text">
+                                        <div className="row">
+                                            <div className="col-lg-12">
+                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="new-button-div">
+                                        <div className="container-fluid p-0">
+                                            {newButton.map((item,index)=>( 
+                                                <div className="row">
+                                                    <div className="col-lg-12 p-0">
+                                                        <div className="btnDiv">
+                                                            <button style={{backgroundColor:item.BtnColor}}>{item.BtnText}</button>
+                                                            <div className="iconDiv">
+                                                                <FontAwesomeIcon icon={faPen}/>
+                                                                <FontAwesomeIcon icon={faTrash}/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                            <div className="row">
+                                                <div className="col-lg-12 p-0">
+                                                    <div className="newBtnDiv">
+                                                        <a><FontAwesomeIcon icon={faPlus}/> NEW BUTTON</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          
                         </div>
                     </div> 
                 </div>
