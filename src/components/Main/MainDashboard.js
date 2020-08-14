@@ -43,6 +43,9 @@ class MainDashboard extends Component{
                     }
                 }
             })
+            if(rooms.length === 0){
+                rooms = this.state.withoutFilteredRooms
+            }
             this.setState({
                 rooms : rooms
             })
