@@ -16,7 +16,7 @@ class Profile extends Component{
     }
     
     render() {
-        if(this.state.firstname === null){
+        if(this.state.firstname === undefined || this.state.firstname === null){
             return (
                <>
                </>
