@@ -2,14 +2,15 @@ import React,{useState} from 'react';
 import '../../styles/style.css';
 import logo from '../../assets/dashboard/logo.PNG';
 import avatar from '../../assets/dashboard/avatar.png';
-import userTable from '../../assets/dashboard/userTable.png';
-import QR from '../../assets/dashboard/qr.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome,faHistory,faUsers,faCog,faEdit,faBuilding,faTimes,faCamera,faEye,faTrash,faPen,faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import Profile from "./Profile"
 import Rooms from "./Rooms"
 import History from "./History"
+import MainDashboard from "./MainDashboard";
+import Actions from "./Actions";
+import Users from "./Users";
 
 const DashBoard = (props) =>{
     const [isShow,setIsShow]=useState({
@@ -38,6 +39,17 @@ const DashBoard = (props) =>{
             
         }
     }
+
+    const openScreenOffice = ()=>{
+        if(document.getElementById('office_Drag_Drop').style.display=="block"){
+            document.getElementById('office_Drag_Drop').style.display="none";
+            document.getElementById('office-main-screen').style.display="block";
+        }
+        else{
+            document.getElementById('office_Drag_Drop').style.display="block";
+            document.getElementById('office-main-screen').style.display="none";
+        }
+    }
     
     const submitForm = () =>{
         const officeName=document.getElementById('office-name').value;
@@ -62,16 +74,7 @@ const DashBoard = (props) =>{
     const togglePasswordVisiblity = () => {
         setPassword(password ? false : true);
     };
-    const openScreenOffice = () =>{
-        if(document.getElementById('office_Drag_Drop').style.display=="block"){
-            document.getElementById('office_Drag_Drop').style.display="none";
-            document.getElementById('office-main-screen').style.display="block";
-        }
-        else{
-            document.getElementById('office_Drag_Drop').style.display="block";
-            document.getElementById('office-main-screen').style.display="none";
-        }
-    }
+
     return(
         <section id="dashBoard">
             <div className="container-fluid">
@@ -119,202 +122,26 @@ const DashBoard = (props) =>{
                         
                         <div className="tab-content">
                             <div id="home" className="tab-pane fade in active">
-                                <div className="main-filter">
-                                    <div className="container-fluid">
-                                        <div className="row">
-                                            <div className="col-lg-8 col-md-8">
-                                                <div className="badgeDiv">
-                                                    <span>Filter By:</span>
-                                                    <span className="btn btn-success">Complete</span>
-                                                    <span className="btn btn-danger">On the Way</span>
-                                                    
-                                                    <span className="btn btn-info">In Room</span>
-                                                    <span className="btn btn-warning">Recived</span>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-4 col-md-4">
-                                                <div className="selectDiv">
-                                                    <label for="cars">Order By:</label>
-                                                    <select name="cars" id="cars">
-                                                    <option value="volvo">Chronological</option>
-                                                    <option value="saab">Saab</option>
-                                                    <option value="mercedes">Mercedes</option>
-                                                    <option value="audi">Audi</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                                <div className="room-details">
-                                    <div className="container-fluid">
-                                        <div className="row">
-                                            <div className="col-lg-3 col-md-6">
-                                                <div className="roomCard">
-                                                    <div className="roomDetail y-l-b">
-                                                        <h3>Room 3</h3>
-                                                        <p className="text">Support Request</p>
-                                                        <p className="text">05:35 PM</p>
-                                                        <hr/>
-                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-3 col-md-6">
-                                                <div className="roomCard">
-                                                    <div className="roomDetail b-l-b">
-                                                        <h3>Room 3</h3>
-                                                        <p className="text">Support Request</p>
-                                                        <p className="text">05:35 PM</p>
-                                                        <hr/>
-                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-3 col-md-6">
-                                                <div className="roomCard">
-                                                    <div className="roomDetail g-l-b">
-                                                        <h3>Room 3</h3>
-                                                        <p className="text">Support Request</p>
-                                                        <p className="text">05:35 PM</p>
-                                                        <hr/>
-                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-3 col-md-6">
-                                                <div className="roomCard">
-                                                    <div className="roomDetail r-l-b">
-                                                        <h3>Room 3</h3>
-                                                        <p className="text">Support Request</p>
-                                                        <p className="text">05:35 PM</p>
-                                                        <hr/>
-                                                        <p><strong>Mortin Camiletti</strong> accepted at <strong>05:35 PM</strong></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <MainDashboard/>
                             </div>
                             <History/>
                             <div id="offices" className="tab-pane fade">
                                 <div id="office-main-screen">
-                                    <div class="modal fade" id="myModal" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                            <h4 class="modal-title">New Room</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's. </p>
-                                                <div className="formDiv">
-                                                    <div className="container-fluid">
-                                                        <div className="row">
-                                                            <div className="col-lg-6">
-                                                                <div class="input-group">
-                                                                    <input className="w-100" type="text" required name="office-name" id="office-name"/>
-                                                                    <span class="highlight"></span>
-                                                                    <span class="bar"></span>
-                                                                    <label>Name Offices</label>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            <div className="col-lg-6">
-                                                                <div class="input-group">
-                                                                    <input type="text" required id="location" className="w-100"/>
-                                                                    <span class="highlight"></span>
-                                                                    <span class="bar"></span>
-                                                                    <label>Loation</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row m-t-20">
-                                                            <div className="col-lg-12">
-                                                                <div class="input-group">
-                                                                    <input type="text" required id="request" className="w-100"/>
-                                                                    <span class="highlight"></span>
-                                                                    <span class="bar"></span>
-                                                                    <label>Button Request</label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="row m-t-20">
-                                                            <div className="col-lg-5">
-                                                                <div className="uploadImage">
-                                                                    <FontAwesomeIcon icon={faCamera}/>
-                                                                    <p>Drop your logo here or</p>
-                                                                <label for="file-input"><span >Upload a Image</span>
-                                                                    <input id="file-input" type="file" />
-                                                                    </label> 
-    
-                                                                </div>
-                                                            </div>
-                                                            <div className="col-lg-7">
-                                                                <div className="imgContentDiv">
-                                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-default cancelBtn" data-dismiss="modal">CANCEL</button>
-                                            <button type="button" class="btn btn-default createRoomBtn" data-dismiss="modal" onClick={submitForm}>CREATE ROOM</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div className="container-fluid">
-                                        <div className="row">
-                                            <div className="col-lg-3 col-md-3 col-sm-3">
-                                                <h3>Offices</h3>
-                                            </div>
-                                            <div className="col-lg-9 col-md-9 col-sm-9">
-                                                <div className="office-btn-div">
-                                                    <span><a>DOWNLOAD ALL QR CODE</a></span>
-                                                    <span type="button"  data-toggle="modal" data-target="#myModal" className="modalBtn"><a>NEW OFFICE</a></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
                                     <Rooms/>
-                                    <div id="QRCode" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-body">
-                                           <img src={QR} className="img-responsive"/>
-                                            <div className="contentDiv">
-                                                <div className="textDiv">
-                                                    <p>QR Code</p>
-                                                    <h4>Room #5</h4>
-                                                </div>
-                                                <i class="fa fa-share-alt" aria-hidden="true"></i>
-                                            </div>
-                                            <p className="paraText">Greyhound divisively hello coldly wonderfully marginally far upon...</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div className="download-QR">
-                                                <a>Download QR Code</a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                    </div>
                                 </div>
-                                <div id="office_Drag_Drop">
-                                 <div className="container-fluid">
-                                     <div className="row">
-                                         <div className="col-lg-12">
-                                             <p onClick={openScreenOffice}><i class="fa fa-arrow-left" aria-hidden="true"></i><a>Back To Office</a></p>
-                                             <h3>Conference Room 5</h3>
-                                             <p className="dragdropText">Drag and Drop to activate or deactivate the different type of technical service</p>
-                                         </div>
-                                     </div>
-                                     <div className="btnDiv">
+                            </div>
+                            <div id="office_Drag_Drop">
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-lg-12">
+                                            <p onClick={openScreenOffice}><i className="fa fa-arrow-left" aria-hidden="true"></i><a>Back
+                                                To Office</a></p>
+                                            <h3>Conference Room 5</h3>
+                                            <p className="dragdropText">Drag and Drop to activate or deactivate the different type of
+                                                technical service</p>
+                                        </div>
+                                    </div>
+                                    <div className="btnDiv">
                                         <div className="row">
                                             <div className="col-lg-6 col-md-6 col-sm-6">
                                                 <h3>Unavailable button request</h3>
@@ -322,51 +149,51 @@ const DashBoard = (props) =>{
                                                     <ol id="disableList" className="connected-sortable draggable-left">
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                     </ol>
@@ -378,164 +205,26 @@ const DashBoard = (props) =>{
                                                     <ol id="activeList" className="connected-sortable draggable-right">
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div className="disableBtn">
-                                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                <i className="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 <span>CALL SUPPORT</span>
-                                                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                                                <i className="fa fa-chevron-right" aria-hidden="true"></i>
                                                             </div>
                                                         </li>
                                                     </ol>
                                                 </div>
                                             </div>
                                         </div>
-                                     </div>           
-                                </div>
-                            </div>           
-                            </div>
-                            <div id="user" className="tab-pane fade">
-                                <div className="container-fluid">
-                                    <div className="row">
-                                        <div className="col-lg-6 col-md-6 col-sm-6">
-                                            <h3>User</h3>
-                                        </div>
-                                        <div className="col-lg-6 col-md-6 col-sm-6">
-                                            <div className="new-user">
-                                                <span> 
-                                                    <a>NEW USER</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="search-Bar">
-                                        <div className="row">
-                                            <div className="col-lg-12">
-                                                <input placeholder="Search User"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="table-Div">
-                                        <div className="container-fluid p-0">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>No.</th>
-                                                    <th>User Name</th>
-                                                    <th>Role</th>
-                                                    <th>Office</th>
-                                                    <th>Register In</th>
-                                                    <th>Actions</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <div className="userNameImg">
-                                                                <img src={userTable} className="img-responsive"/>
-                                                                <h4>Emilio Guerrilla</h4>
-                                                            </div>
-                                                        </td>
-                                                        <td>Admin - Technician</td>
-                                                        <td>5 - D</td>
-                                                        <td>15/11/2020</td>
-                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <div className="userNameImg">
-                                                                <img src={userTable} className="img-responsive"/>
-                                                                <h4>Emilio Guerrilla</h4>
-                                                            </div>
-                                                        </td>
-                                                        <td>Admin - Technician</td>
-                                                        <td>5 - D</td>
-                                                        <td>15/11/2020</td>
-                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <div className="userNameImg">
-                                                                <img src={userTable} className="img-responsive"/>
-                                                                <h4>Emilio Guerrilla</h4>
-                                                            </div>
-                                                        </td>
-                                                        <td>Admin - Technician</td>
-                                                        <td>5 - D</td>
-                                                        <td>15/11/2020</td>
-                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <div className="userNameImg">
-                                                                <img src={userTable} className="img-responsive"/>
-                                                                <h4>Emilio Guerrilla</h4>
-                                                            </div>
-                                                        </td>
-                                                        <td>Admin - Technician</td>
-                                                        <td>5 - D</td>
-                                                        <td>15/11/2020</td>
-                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <div className="userNameImg">
-                                                                <img src={userTable} className="img-responsive"/>
-                                                                <h4>Emilio Guerrilla</h4>
-                                                            </div>
-                                                        </td>
-                                                        <td>Admin - Technician</td>
-                                                        <td>5 - D</td>
-                                                        <td>15/11/2020</td>
-                                                        <td><i class="fa fa-ellipsis-v" aria-hidden="true"></i></td>
-                                                    </tr>
-                                                </tbody>
-                                                 
-                                            </table>
-                                            </div>
-                                            <div className="table-footer">
-                                                <div className="container-fluid">
-                                                            <div className="row">
-                                                                <div className="col-lg-12">
-                                                                    <div className="multipleDiv">
-                                                                            <div className="item-per-page">
-                                                                                <label>Item per page:</label>
-                                                                                <select>
-                                                                                    <option>1</option>
-                                                                                    <option>2</option>
-                                                                                    <option>3</option>
-                                                                                    <option>4</option>
-                                                                                    <option>5</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div className="paginationText">
-                                                                                <p>1-5 of 20</p>
-                                                                            </div>
-                                                                            <div className="arrowsDiv">
-                                                                                <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-                                                                                <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                                                                            </div>
-                                                                        </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <Users/>
                             <div id="setting" className="tab-pane fade">
                                 <h3>About you</h3>
                                 <div className="profile-image-div">
