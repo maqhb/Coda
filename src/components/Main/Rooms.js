@@ -31,6 +31,7 @@ class Rooms extends Component{
         this.updateOfficeName = ""
         this.updateLocationAddr = ""
         this.updateButtons = ""
+        this.updateRoomID = null
     }
 
     componentDidMount() {
@@ -59,7 +60,7 @@ class Rooms extends Component{
             created_at:new Date().toDateString(),
             updated_at:new Date().toDateString()
         }
-       Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save", data).then((response)=>{
+       Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save/?access_token="+Cookies.get("token")+"&title="+this.officeName+"&address="+this.locationAddr+"&latitude=0.00000000&longitude=0.00000000&photo=null&buttons="+this.buttons+"&created_at="+new Date().toDateString()+"&updated_at="+new Date().toLocaleString()).then((response)=>{
             if(response.data.success){
                 this.getRooms()
             }
@@ -71,20 +72,8 @@ class Rooms extends Component{
         })
     }
 
-    updateOffice(key){
-        let data  = {
-            access_token:Cookies.get("token"),
-            title:this.updateOfficeName,
-            address:this.updateLocationAddr,
-            latitude:0.00000000,
-            longitude:0.00000000,
-            photo:null,
-            buttons:this.updateButtons,
-            created_at:new Date().toDateString(),
-            updated_at:new Date().toDateString(),
-            key:key
-        }
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save", data).then((response)=>{
+    updateOffice(){
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save?access_token="+Cookies.get("token")+"&title="+this.updateOfficeName+"&address="+this.updateLocationAddr+"&latitude=0.00000000&longitude=0.00000000&photo=null&buttons="+this.updateButtons+"&created_at="+new Date().toDateString()+"&updated_at="+new Date().toLocaleString()).then((response)=>{
             if(response.data.success){
                 this.getRooms()
             }
@@ -173,7 +162,7 @@ class Rooms extends Component{
                                                   this.state.flag && this.state.index===index&&
                                                   <div className="office-dropDown">
                                                       <p type="button" data-toggle="modal" data-target="#QRCode"><a>View QR Code</a></p>
-                                                      <p data-toggle="modal" data-target="#editModal"><a>Edit Room</a></p>
+                                                      <p data-toggle="modal" data-target="#editModal"><a onClick={(event)=>{this.updateRoomID = item.id}}>Edit Room</a></p>
                                                       <p ><a id={item.id} onClick={this.deleteRooms}>Delete Room</a></p>
                                                   </div>
                                               }
