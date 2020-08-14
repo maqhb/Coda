@@ -6,9 +6,11 @@ class MainDashboard extends Component{
     constructor(props){
         super(props)
         this.state={
+            withoutFilteredRooms : null,
             rooms: null
         }
         this.getRecentRooms = this.getRecentRooms.bind(this)
+        this.filterRooms = this.filterRooms.bind(this)
     }
 
     componentDidMount() {
@@ -19,7 +21,8 @@ class MainDashboard extends Component{
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/dashboard?asc=1&limit=4&access_token="+Cookies.get("token")).then((response)=>{
             if(response.data.success){
                 this.setState({
-                    rooms : response.data.response.data
+                    rooms : response.data.response.data,
+                    withoutFilteredRooms : response.data.response.data
                 })
             }
             else{
@@ -30,8 +33,24 @@ class MainDashboard extends Component{
         })
     }
 
+    filterRooms(type){
+        if(this.state.withoutFilteredRooms !== null){
+            let rooms = [];
+            this.state.withoutFilteredRooms.map((item, index)=>{
+                if(item.request){
+                    if(item.request.status === type){
+                        rooms.push(item)
+                    }
+                }
+            })
+            this.setState({
+                rooms : rooms
+            })
+        }
+    }
+
     render() {
-        if(this.state.rooms === null){
+        if(this.state.withoutFilteredRooms === null){
             return (<p></p>)
         }else {
             return (
@@ -42,10 +61,10 @@ class MainDashboard extends Component{
                             <div className="col-lg-8 col-md-8">
                                 <div className="badgeDiv">
                                     <span>Filter By:</span>
-                                    <span className="btn btn-success">Complete</span>
-                                    <span className="btn btn-danger">On the Way</span>
-                                    <span className="btn btn-info">In Room</span>
-                                    <span className="btn btn-warning">Recived</span>
+                                    <span className="btn btn-success" onClick={(event => this.filterRooms(3))}>Complete</span>
+                                    <span className="btn btn-danger" onClick={(event => this.filterRooms(0))}>On the Way</span>
+                                    <span className="btn btn-info" onClick={(event => this.filterRooms(2))}>In Room</span>
+                                    <span className="btn btn-warning" onClick={(event => this.filterRooms(5))}>Received</span>
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-4">

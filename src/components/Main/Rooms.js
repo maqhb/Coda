@@ -22,28 +22,21 @@ class Rooms extends Component{
         this.deleteRooms = this.deleteRooms.bind(this)
         this.openMenuItem = this.openMenuItem.bind(this)
         this.openScreenOffice = this.openScreenOffice.bind(this)
-        this.submitForm = this.submitForm.bind(this)
         this.openScreenOffice = this.openScreenOffice.bind(this)
+        this.createNewOffice = this.createNewOffice.bind(this)
+        this.updateOffice =this.updateOffice.bind(this)
+        this.officeName = ""
+        this.locationAddr = ""
+        this.buttons = ""
+        this.updateOfficeName = ""
+        this.updateLocationAddr = ""
+        this.updateButtons = ""
     }
 
     componentDidMount() {
         this.getRooms()
     }
 
-
-
-    submitForm(){
-        const officeName=document.getElementById('office-name').value;
-        const location=document.getElementById('location').value;
-        const request=document.getElementById('request').value;
-        console.log(officeName)
-        console.log(location)
-        console.log(request)
-        if(officeName!="" && location!="" && request!=""){
-            const newObj={'roomNo':officeName,'user':'15 users','request':request,'address':location};
-            //setNewOffice(state=>[...state,newObj]);
-        }
-    }
 
     openMenuItem(item,index){
         if(this.state.index===index){
@@ -55,7 +48,43 @@ class Rooms extends Component{
     }
 
     createNewOffice(){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save?access_token="+Cookies.get("token")).then((response)=>{
+        let data  = {
+            access_token:Cookies.get("token"),
+            title:this.officeName,
+            address:this.locationAddr,
+            latitude:0.00000000,
+            longitude:0.00000000,
+            photo:null,
+            buttons:this.buttons,
+            created_at:new Date().toDateString(),
+            updated_at:new Date().toDateString()
+        }
+       Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save", data).then((response)=>{
+            if(response.data.success){
+                this.getRooms()
+            }
+            else{
+                alert("Failed to create new Room")
+            }
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
+
+    updateOffice(key){
+        let data  = {
+            access_token:Cookies.get("token"),
+            title:this.updateOfficeName,
+            address:this.updateLocationAddr,
+            latitude:0.00000000,
+            longitude:0.00000000,
+            photo:null,
+            buttons:this.updateButtons,
+            created_at:new Date().toDateString(),
+            updated_at:new Date().toDateString(),
+            key:key
+        }
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save", data).then((response)=>{
             if(response.data.success){
                 this.getRooms()
             }
@@ -177,7 +206,7 @@ class Rooms extends Component{
                                                   <div className="row">
                                                       <div className="col-lg-6">
                                                           <div className="input-group">
-                                                              <input className="w-100" type="text" required
+                                                              <input className="w-100" type="text" required onChange={(event => {this.updateOfficeName = event.target.value})}
                                                                      name="office-name" id="office-name"/>
                                                               <span className="highlight"></span>
                                                               <span className="bar"></span>
@@ -187,7 +216,7 @@ class Rooms extends Component{
                                                       </div>
                                                       <div className="col-lg-6">
                                                           <div className="input-group">
-                                                              <input type="text" required id="location"
+                                                              <input type="text" required id="location" onChange={(event => {this.updateLocationAddr = event.target.value})}
                                                                      className="w-100"/>
                                                               <span className="highlight"></span>
                                                               <span className="bar"></span>
@@ -198,7 +227,7 @@ class Rooms extends Component{
                                                   <div className="row m-t-20">
                                                       <div className="col-lg-12">
                                                           <div className="input-group">
-                                                              <input type="text" required id="request"
+                                                              <input type="text" required id="request" onChange={(event => {this.updateButtons = event.target.value})}
                                                                      className="w-100"/>
                                                               <span className="highlight"></span>
                                                               <span className="bar"></span>
@@ -231,7 +260,7 @@ class Rooms extends Component{
                                           <button type="button" className="btn btn-default cancelBtn"
                                                   data-dismiss="modal">CANCEL
                                           </button>
-                                          <button type="button" className="btn btn-default createRoomBtn"
+                                          <button type="button" className="btn btn-default createRoomBtn" onClick={this.updateOffice}
                                                   data-dismiss="modal">UPDATE ROOM
                                           </button>
                                       </div>
@@ -254,8 +283,7 @@ class Rooms extends Component{
                                               <div className="row">
                                                   <div className="col-lg-6">
                                                       <div className="input-group">
-                                                          <input className="w-100" type="text" required
-                                                                 name="office-name" id="office-name"/>
+                                                          <input className="w-100" type="text" required name="office-name" onChange={(event => {this.officeName = event.target.value})} id="office-name"/>
                                                           <span className="highlight"></span>
                                                           <span className="bar"></span>
                                                           <label>Name Offices</label>
@@ -264,7 +292,7 @@ class Rooms extends Component{
                                                   </div>
                                                   <div className="col-lg-6">
                                                       <div className="input-group">
-                                                          <input type="text" required id="location" className="w-100"/>
+                                                          <input type="text" required id="location" onChange={(event => {this.locationAddr = event.target.value})} className="w-100"/>
                                                           <span className="highlight"></span>
                                                           <span className="bar"></span>
                                                           <label>Location</label>
@@ -274,7 +302,7 @@ class Rooms extends Component{
                                               <div className="row m-t-20">
                                                   <div className="col-lg-12">
                                                       <div className="input-group">
-                                                          <input type="text" required id="request" className="w-100"/>
+                                                          <input type="text" required id="request" onChange={(event => {this.buttons = event.target.value})} className="w-100"/>
                                                           <span className="highlight"></span>
                                                           <span className="bar"></span>
                                                           <label>Button Request</label>
@@ -307,7 +335,7 @@ class Rooms extends Component{
                                               data-dismiss="modal">CANCEL
                                       </button>
                                       <button type="button" className="btn btn-default createRoomBtn"
-                                              data-dismiss="modal" onClick={this.submitForm}>CREATE ROOM
+                                              data-dismiss="modal" onClick={this.createNewOffice}>CREATE ROOM
                                       </button>
                                   </div>
                               </div>
