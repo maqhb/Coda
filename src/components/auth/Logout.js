@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {Link,Redirect} from 'react-router-dom';
 import '../../styles/style.css';
+import Cookies from 'js-cookie'
 
 export default class Logout extends Component{
   
@@ -33,6 +34,7 @@ export default class Logout extends Component{
     }
 
     logout(){
+        Cookies.remove("token");
         return (<Redirect to={{pathname: '/', state: {logout: true}}}/>);
     }
 

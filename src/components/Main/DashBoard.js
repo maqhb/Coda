@@ -11,6 +11,7 @@ import History from "./History"
 import MainDashboard from "./MainDashboard";
 import Actions from "./Actions";
 import Users from "./Users";
+import Logout from "../auth/Logout";
 
 const DashBoard = (props) =>{
     const [isShow,setIsShow]=useState({
@@ -100,25 +101,7 @@ const DashBoard = (props) =>{
                     </div>
                     
                    <div className="main-content col-lg-10 col-md-9 col-sm-12 p-0 offset-lg-2 offset-md-3">
-                          <div className="main-navbar sticky-top bg-white">
-                            <nav className="navbar navbar-inverse">
-                                <div className="container-fluid">
-                                    <div className="navbar-header">
-                                    <button type="button" className="navbar-toggle mobileBtn" onClick={openMenu}>
-                                        <span className="icon-bar"></span>
-                                        <span className="icon-bar"></span>
-                                        <span className="icon-bar"></span>                        
-                                    </button>
-                                    <a className="navbar-brand" href="#">Stockely Park</a>
-                                    </div>
-                                    <div className="collapse navbar-collapse" id="myNavbar">
-                                    <ul className="nav navbar-nav navbar-right">
-                                        <li><a href="#">Login</a></li>
-                                    </ul>
-                                    </div>
-                                </div>
-                            </nav>
-                        </div>
+                         <Logout />
                         
                         <div className="tab-content">
                             <div id="home" className="tab-pane fade in active">
