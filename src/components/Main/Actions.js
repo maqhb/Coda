@@ -13,6 +13,7 @@ class Actions extends Component{
         this.getActions = this.getActions.bind(this)
         this.newAction = this.newAction.bind(this)
         this.newMakeButton = this.newMakeButton.bind(this)
+        this.deleteAction = this.deleteAction.bind(this)
     }
 
     componentDidMount() {
@@ -50,6 +51,21 @@ class Actions extends Component{
             }
             else{
                 alert("Failed to get Rooms")
+            }
+        }).catch((error)=>{
+            alert(error)
+        })
+    }
+
+    deleteAction(id){
+        console.log(id)
+        console.log("called delete")
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/action/remove?access_token="+Cookies.get("token")+"&id="+id).then((response)=>{
+            if(response.data.success){
+                this.getActions()
+            }
+            else{
+                alert("Failed to delete Room")
             }
         }).catch((error)=>{
             alert(error)
@@ -151,7 +167,7 @@ class Actions extends Component{
                                                 <button style={{backgroundColor:(item.color === "1")?"#15d1a5":"#f0ad4e"}}><strong>{item.title}</strong><br/>{item.caption} </button>
                                                 <div className="iconDiv">
                                                     <FontAwesomeIcon icon={faPen}/>
-                                                    <FontAwesomeIcon icon={faTrash}/>
+                                                    <FontAwesomeIcon icon={faTrash} onClick={(event => this.deleteAction(item.id))}/>
                                                 </div>
                                             </div>
                                         </div>

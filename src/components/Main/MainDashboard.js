@@ -16,7 +16,7 @@ class MainDashboard extends Component{
     }
 
     getRecentRooms(){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/list?asc=1&limit=4&access_token="+Cookies.get("token")).then((response)=>{
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/dashboard?asc=1&limit=4&access_token="+Cookies.get("token")).then((response)=>{
             if(response.data.success){
                 this.setState({
                     rooms : response.data.response.data
@@ -32,32 +32,75 @@ class MainDashboard extends Component{
 
     render() {
         if(this.state.rooms === null){
-            return (
-                <h5>Loading ...</h5>
-            )
+            return (<p></p>)
         }else {
             return (
+                <>
+                <div className="main-filter">
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-lg-8 col-md-8">
+                                <div className="badgeDiv">
+                                    <span>Filter By:</span>
+                                    <span className="btn btn-success">Complete</span>
+                                    <span className="btn btn-danger">On the Way</span>
+                                    <span className="btn btn-info">In Room</span>
+                                    <span className="btn btn-warning">Recived</span>
+                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-4">
+                                <div className="selectDiv">
+                                    <label htmlFor="cars">Order By:</label>
+                                    <select name="cars" id="cars">
+                                        <option value="volvo">Chronological</option>
+                                        <option value="saab">Saab</option>
+                                        <option value="mercedes">Mercedes</option>
+                                        <option value="audi">Audi</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="room-details">
                     <div className="container-fluid">
                         <div className="row">
                             {
-                                this.state.rooms.map((item, index)=>(
+                                this.state.rooms.map((item, index)=>{
+                                    let status  = ""
+                                    if(item.request !== null) {
+                                        if (item.request.status === 0) {
+                                            status = "pending request"
+                                        } else if (item.request.status === 1) {
+                                            status = " accepted at " + item.request.date_accept
+                                        } else if (item.request.status === 2) {
+                                            status = " waiting request"
+                                        } else if (item.request.status === 3) {
+                                            status = " completed at " + item.date_completed
+                                        } else if (item.request.status === 4) {
+                                            status = " cancelled request"
+                                        } else if (item.request.status === 5) {
+                                            status = " arrived at "+item.date_arrive
+                                        }
+                                    }
+                                    return(
                                     <div className="col-lg-3 col-md-6">
                                         <div className="roomCard">
                                             <div className="roomDetail y-l-b">
                                                 <h3>{item.title}</h3>
-                                                <p className="text">{(item.address === "" || item.address === null)?item.address:"Address"}</p>
-                                                <p className="text">{item.created_at}</p>
+                                                <p>Support Request</p>
+                                                <p className="text">{item.updated_at}</p>
                                                 <hr/>
-                                                <p><strong>Status: </strong>{(item.deleted === 1)?"Deleted":"Valid"}</p>
+                                                <p>{(item.request === null)?"":item.request.user.firstname+status}</p>
                                             </div>
                                         </div>
                                     </div>
-                                ))
+                                )})
                             }
                         </div>
                     </div>
                 </div>
+                </>
             )
         }
     }
