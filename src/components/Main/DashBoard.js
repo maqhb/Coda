@@ -309,6 +309,7 @@ const DashBoard = (props) =>{
                                     </div>
                                 </div>
                             </div>
+                            <Actions/>
                           
                         </div>
                     </div> 
