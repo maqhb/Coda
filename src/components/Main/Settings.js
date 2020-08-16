@@ -10,11 +10,15 @@ export default class Settings extends Component{
         super(props)
         this.getCurrUserInfo = this.getCurrUserInfo.bind(this)
         this.togglePasswordVisiblity = this.togglePasswordVisiblity.bind(this)
+        this.updateUserInfo = this.updateUserInfo.bind(this)
         this.state = {
             user : null,
-            firstname: 'MAQ',
             password: false,
         }
+        this.firstname = "";
+        this.lastname = "";
+        this.email = "";
+        this.password = "";
     }
     componentDidMount() {
         this.getCurrUserInfo()
@@ -30,6 +34,25 @@ export default class Settings extends Component{
                 this.setState({
                     user : response.data.response
                 })
+                this.firstname = this.state.user.firstname;
+                this.lastname = this.state.user.lastname;
+                this.email = this.state.user.email;
+                this.password = this.state.user.password;
+            }
+            else{
+                this.setState({
+                    msg:response.data.error.message
+                })
+            }
+        }).catch((error)=>{
+            alert(error)
+        })
+    }
+
+    updateUserInfo(){
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/mia-auth/update-profile?access_token="+Cookies.get("token")+"&firstname="+this.firstname+"&lastname="+this.lastname+"&email="+this.email+"&password="+this.password).then((response)=>{
+            if(response.data.success){
+                alert("Successfully Changed");
                 
             }
             else{
@@ -41,6 +64,7 @@ export default class Settings extends Component{
             alert(error)
         })
     }
+
     render() {
         if(this.state.user!=null){
             return (
@@ -69,22 +93,22 @@ export default class Settings extends Component{
                             <div className="col-lg-6 col-md-6 col-sm-6">
                                 
                                 <label>Name</label>
-                                <input placeholder="First Name" value={this.state.user.firstname} className="m-b-10"/>
+                                <input placeholder={this.state.user.firstname}  onChange={(event)=>(this.firstname = event.target.value)} className="m-b-10"/>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6">
                                 <label>Last Name</label>
-                                <input placeholder="Last Name" value={this.state.user.lastname}/>
+                                <input placeholder={this.state.user.lastname}  onChange={(event)=>(this.lastname = event.target.value)}/>
                             </div>
                         </div>
                         <div className="row m-t-20">
                             <div className="col-lg-6 col-md-6 col-sm-6">
                                 <label>Email</label>
-                                <input placeholder="comapny@example.com" value={this.state.user.email} className="m-b-10"/>
+                                <input placeholder={this.state.user.email}  onChange={(event)=>(this.email = event.target.value)} className="m-b-10"/>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6 ">
                             <div className="inputPassword">
                                 <label>Password</label>
-                                <input placeholder="Password"  type={this.state.password ? "text" : "password"}></input>
+                                <input placeholder="Password"  type={this.state.password ? "text" : "password"} onChange={(event)=>(this.password = event.target.value)}></input>
                                 <FontAwesomeIcon onClick={this.togglePasswordVisiblity} icon={faEye}/>
                             </div>
                             </div>
@@ -129,7 +153,7 @@ export default class Settings extends Component{
                                         <a href="">CANCELAR</a>
                                     </span>
                                     <span>
-                                        <a href="">GUARDAR CAMBIOS</a>
+                                        <a href="" onClick={this.updateUserInfo}>GUARDAR CAMBIOS</a>
                                     </span>
                                 </div>
                             </div>
