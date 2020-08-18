@@ -7,6 +7,7 @@ import Cookies from 'js-cookie'
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import QR from "../../assets/dashboard/qr.png";
+import ReactImageUploadComponent from "react-images-upload";
 
 
 class Rooms extends Component{
@@ -33,6 +34,7 @@ class Rooms extends Component{
         this.updateButtons = ""
         this.updateRoomID = null
         this.created_at = null
+        this.newImage = null
     }
 
     componentDidMount() {
@@ -50,8 +52,9 @@ class Rooms extends Component{
     }
 
     createNewOffice(){
-        let date = new Date().toJSON().replace("T"," ").substr(0,19)
-       Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save/?access_token="+Cookies.get("token")+"&title="+this.officeName+"&address="+this.locationAddr+"&created_at="+date+"&updated_at="+date+"&latitude=0.00000000&longitude=0.00000000&photo=null&buttons="+this.buttons).then((response)=>{
+        let request = this.formData(false)
+        console.log(request)
+        Axios(request).then((response)=>{
             if(response.data.success){
                 this.getRooms()
             }
@@ -63,9 +66,29 @@ class Rooms extends Component{
         })
     }
 
-    updateOffice(){
+    formData(update){
         let date = new Date().toJSON().replace("T"," ").substr(0,19)
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/save?access_token="+Cookies.get("token")+"&title="+this.updateOfficeName+"&address="+this.updateLocationAddr+"&created_at="+this.created_at+"&updated_at="+date+"&id="+this.updateRoomID+"&latitude=0.00000000&longitude=0.00000000&photo=null&buttons="+this.updateButtons).then((response)=>{
+        let formdata = new FormData()
+        formdata.append("access_token",Cookies.get("token"))
+        formdata.append("title",this.officeName)
+        formdata.append("address",this.locationAddr)
+        formdata.append("created_at",(update)?this.created_at:date)
+        formdata.append("updated_at",date)
+        formdata.append("latitude","0.00000000")
+        formdata.append("longitude","0.00000000")
+        formdata.append("photo",new Blob(this.newImage))
+        formdata.append("buttons=",this.buttons)
+        let config = {
+            method: 'post',
+            url: 'https://kallpod-dev-php.ue.r.appspot.com/room/save',
+            data : formdata
+        };
+        return config
+    }
+
+    updateOffice(){
+        let formdata = this.formData(true)
+        Axios(formdata).then((response)=>{
             if(response.data.success){
                 this.getRooms()
             }
@@ -91,6 +114,7 @@ class Rooms extends Component{
     getRooms(){
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/list?asc=1&access_token="+Cookies.get("token")).then((response)=>{
             if(response.data.success){
+                console.log(response.data.response.data)
                 this.setState({
                     newOffice : response.data.response.data
                 })
@@ -148,7 +172,7 @@ class Rooms extends Component{
                                   <div className="col-lg-3 col-md-4 col-sm-6" key={index}>
                                       <div className="offceDiv">
                                           <div className="more-btn-img">
-                                              <img src={(item.photo === null || item.photo === "null")?office:item.photo}/>
+                                              <img src={(item.photo === null || item.photo === "null" || item.photo === "")?office:item.photo}/>
                                               <img className="moreImg" src={more} onClick={()=>this.openMenuItem(item,index)}/>
                                               {
                                                   this.state.flag && this.state.index===index&&
@@ -218,14 +242,14 @@ class Rooms extends Component{
                                                   </div>
                                                   <div className="row m-t-20">
                                                       <div className="col-lg-5">
-                                                          <div className="uploadImage">
-                                                              <FontAwesomeIcon icon={faCamera}/>
-                                                              <p>Drop your logo here or</p>
-                                                              <label htmlFor="file-input"><span>Upload a Image</span>
-                                                                  <input id="file-input" type="file"/>
-                                                              </label>
-
-                                                          </div>
+                                                          <ReactImageUploadComponent
+                                                              withIcon={true}
+                                                              buttonText='Upload images'
+                                                              imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                                              maxFileSize={5242880}
+                                                              onChange={(picture)=>(this.newImage = picture)}
+                                                              singleImage={true}
+                                                          />
                                                       </div>
                                                       <div className="col-lg-7">
                                                           <div className="imgContentDiv">
@@ -293,12 +317,14 @@ class Rooms extends Component{
                                               <div className="row m-t-20">
                                                   <div className="col-lg-5">
                                                       <div className="uploadImage">
-                                                          <FontAwesomeIcon icon={faCamera}/>
-                                                          <p>Drop your logo here or</p>
-                                                          <label htmlFor="file-input"><span>Upload a Image</span>
-                                                              <input id="file-input" type="file"/>
-                                                          </label>
-
+                                                          <ReactImageUploadComponent
+                                                                  withIcon={true}
+                                                                  buttonText='Upload images'
+                                                                  imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                                                  maxFileSize={5242880}
+                                                                  onChange={(picture)=>(this.newImage = picture)}
+                                                                  singleImage={true}
+                                                              />
                                                       </div>
                                                   </div>
                                                   <div className="col-lg-7">

@@ -515,7 +515,7 @@ p,h1,h2,h3,h4,h5,h6,a,span,label,input,th,td{
 .uploadImage{
     border: 1px solid;
     border-style: dashed;
-    padding: 40px 20px;
+    padding: 5px 20px;
     border-radius: 5px;
     text-align: center;
     position: relative;
@@ -987,8 +987,11 @@ button.close:focus{
     .edit-profile-div, .about-company,.about-company .image-content{
         max-width: 100% !important;
     }
-    .about-company .uploadImage{
+    .about-company{
         padding: 10px;
+    }
+    .uploadImage{
+        padding: 2px;
     }
     #dashBoard .main-content #setting .image-content{
         margin-bottom: 10px !important;
