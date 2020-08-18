@@ -16,6 +16,10 @@ export default class Users extends Component{
         }
         this.createUser =this.createUser.bind(this)
         this.deleteUser = this.deleteUser.bind(this)
+        this.firstname = ""
+        this.lastname = ""
+        this.email = ""
+        this.password = ""
     }
     componentDidMount() {
         this.getUsers()
@@ -49,9 +53,29 @@ export default class Users extends Component{
 
     createUser(){
         let data = {
-
+            access_token: Cookies.get('token'),
+            firstname: this.firstname,
+            lastname: this.lastname,
+            email: this.email,
+            password: this.password
         }
-        axios.post('https://kallpod-dev-php.ue.r.appspot.com/room/save', data)
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify(data);
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+        };
+
+        fetch("https://kallpod-dev-php.ue.r.appspot.com/user/save", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
     }
 
 
@@ -159,8 +183,8 @@ export default class Users extends Component{
                                             <div className="row">
                                                 <div className="col-lg-6">
                                                     <div className="input-group">
-                                                        <input className="w-100" type="text" required name="office-name"
-                                                               id="office-name"/>
+                                                        <input className="w-100" onChange={(event => {this.firstname = event.target.value})} type="text" required name="office-name"
+                                                               id="firstname"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
                                                         <label>First Name</label>
@@ -169,7 +193,7 @@ export default class Users extends Component{
                                                 </div>
                                                 <div className="col-lg-6">
                                                     <div className="input-group">
-                                                        <input type="text" required id="location" className="w-100"/>
+                                                        <input type="text" required id="lastname" onChange={(event => {this.lastname = event.target.value})} className="w-100"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
                                                         <label>Last name</label>
@@ -179,7 +203,7 @@ export default class Users extends Component{
                                             <div className="row m-t-20">
                                                 <div className="col-lg-6">
                                                     <div className="input-group">
-                                                        <input className="w-100" type="text" required name="office-name"
+                                                        <input className="w-100" type="email" onChange={(event => {this.email = event.target.value})} required name="office-name"
                                                                id="office-name"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
@@ -189,7 +213,7 @@ export default class Users extends Component{
                                                 </div>
                                                 <div className="col-lg-6">
                                                     <div className="input-group">
-                                                        <input type="text" required id="location" className="w-100"/>
+                                                        <input type="password" required  onChange={(event => {this.password = event.target.value})} id="password" className="w-100"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
                                                         <label>Password</label>
