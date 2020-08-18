@@ -26,6 +26,7 @@ export default class Users extends Component{
     }
 
     getUsers(){
+        this.setState({flag:false,card:null,index:null})
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/user/list?asc=1&access_token="+Cookies.get("token")).then((response)=>{
             if(response.data.success){
                 this.setState({
@@ -40,6 +41,8 @@ export default class Users extends Component{
         }).catch((error)=>{
             alert(error)
         })
+
+        
     }
 
     openMenuItem(item,index){
@@ -78,6 +81,8 @@ export default class Users extends Component{
             this.getUsers()
         })
         .catch(error => console.log('error', error));
+
+        
     }
 
 
@@ -135,7 +140,7 @@ export default class Users extends Component{
                                             <th>No.</th>
                                             <th>User Name</th>
                                             <th>Role</th>
-                                            <th>Office</th>
+                                            {/* <th>Office</th> */}
                                             <th>Register In</th>
                                             <th>Actions</th>
                                         </tr>
@@ -143,7 +148,7 @@ export default class Users extends Component{
                                         <tbody>
                                         {(this.state.users === null)?this.state.msg:this.state.users.map((item, index) => (
                                             <tr>
-                                                <td>{index+1}</td>
+                                                <td>{item.id}</td>
                                                 <td>
                                                     <div className="userNameImg">
                                                         <img src={(item.photo === "" || item.photo === null) ? userTable : item.photo}
@@ -152,14 +157,31 @@ export default class Users extends Component{
                                                     </div>
                                                 </td>
                                                 <td>{(item.role === 1) ? "Admin" : "Technician"}</td>
-                                                <td>5 - D</td>
+                                                {/* <td>5 - D</td> */}
                                                 <td>{item.created_at}</td>
                                                 <td><i className="fa fa-ellipsis-v" aria-hidden="true" onClick={()=>this.openMenuItem(item,index)}/>
                                                     {
                                                         this.state.flag && this.state.index === index &&
-                                                        <div className="office-dropDown">
+                                                        <>
+<nav class="context-menu">
+  <ul class="context-menu__items">
+    <li  class="context-menu__item" >
+      <a id={item.id} class="context-menu__link" onClick={(event => (this.deleteUser(item.id)))}>
+        <i class="fa fa-times" ></i> Delete User
+      </a>
+    </li>
+    <li  class="context-menu__item" >
+      <a id={item.id} class="context-menu__link" onClick={(event => (this.deleteUser(item.id)))}>
+        <i class="fa fa-edit" ></i> Edit User
+      </a>
+    </li>
+  </ul>
+</nav>
+
+                                                        {/* <div className="usersContextMenu">
                                                             <p><a id={item.id} onClick={(event => (this.deleteUser(item.id)))}>Delete User</a></p>
-                                                        </div>
+                                                        </div> */}
+                                                        </>
                                                     }
                                               </td>
                                             </tr>
