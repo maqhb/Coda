@@ -59,7 +59,6 @@ export default class Users extends Component{
             email: this.email,
             password: this.password
         }
-<<<<<<< HEAD
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -75,11 +74,10 @@ export default class Users extends Component{
 
         fetch("https://kallpod-dev-php.ue.r.appspot.com/user/save", requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result =>{
+            this.getUsers()
+        })
         .catch(error => console.log('error', error));
-=======
-        Axios.post('https://kallpod-dev-php.ue.r.appspot.com/room/save', data)
->>>>>>> 63c4808c39f0e31bbb6ffd59ee21f755c28c7ddb
     }
 
 
