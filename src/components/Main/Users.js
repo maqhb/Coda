@@ -171,7 +171,7 @@ export default class Users extends Component{
       </a>
     </li>
     <li  class="context-menu__item" >
-      <a id={item.id} class="context-menu__link" onClick={(event => (this.deleteUser(item.id)))}>
+      <a id={item.id} class="context-menu__link" >
         <i class="fa fa-edit" ></i> Edit User
       </a>
     </li>
