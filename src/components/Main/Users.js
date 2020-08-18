@@ -51,12 +51,29 @@ export default class Users extends Component{
         let data = {
 
         }
-        axios.post('https://kallpod-dev-php.ue.r.appspot.com/room/save', data)
+        Axios.post('https://kallpod-dev-php.ue.r.appspot.com/room/save', data)
     }
 
 
     deleteUser(id){
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
 
+        let raw = JSON.stringify({"access_token":"7d4a11c5a1d0d8cfb1fe8cd7af7fd272fb3ab065","id":id.toString()});
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://kallpod-dev-php.ue.r.appspot.com/user/remove", requestOptions)
+                .then(response => response.text())
+                .then(result => {
+                    this.getUsers()
+                })
+                .catch(error => console.log('error', error));
     }
 
 
