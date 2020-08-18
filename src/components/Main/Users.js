@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import userTable from "../../assets/dashboard/userTable.png";
 import Axios from "axios";
 import Cookies from "js-cookie";
+import ReactImageUploadComponent from "react-images-upload";
 
 export default class Users extends Component{
     constructor(props){
@@ -9,8 +10,12 @@ export default class Users extends Component{
         this.getUsers = this.getUsers.bind(this)
         this.state = {
             users : null,
-            msg:"Loading"
+            msg:"Loading",
+            flag: false,
+            index:null
         }
+        this.createUser =this.createUser.bind(this)
+        this.deleteUser = this.deleteUser.bind(this)
     }
     componentDidMount() {
         this.getUsers()
@@ -32,6 +37,29 @@ export default class Users extends Component{
             alert(error)
         })
     }
+
+    openMenuItem(item,index){
+        if(this.state.index===index){
+            this.setState({flag:false,card:null,index:null})
+        }
+        else{
+            this.setState({flag:true,card:item,index});
+        }
+    }
+
+    createUser(){
+        let data = {
+
+        }
+        axios.post('https://kallpod-dev-php.ue.r.appspot.com/room/save', data)
+    }
+
+
+    deleteUser(id){
+
+    }
+
+
     render() {
             return (
                 <div id="user" className="tab-pane fade">
@@ -41,7 +69,7 @@ export default class Users extends Component{
                                 <h3>User</h3>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6">
-                                <div className="new-user">
+                                <div className="new-user" data-toggle="modal" data-target="#userModal">
                                                 <span>
                                                     <a>NEW USER</a>
                                                 </span>
@@ -75,7 +103,7 @@ export default class Users extends Component{
                                                 <td>1</td>
                                                 <td>
                                                     <div className="userNameImg">
-                                                        <img src={(item.photo === "") ? userTable : item.photo}
+                                                        <img src={(item.photo === "" || item.photo === null) ? userTable : item.photo}
                                                              className="img-responsive"/>
                                                         <h4>{item.firstname + " " + item.lastname}</h4>
                                                     </div>
@@ -83,7 +111,14 @@ export default class Users extends Component{
                                                 <td>{(item.role === 1) ? "Admin" : "Technician"}</td>
                                                 <td>5 - D</td>
                                                 <td>{item.created_at}</td>
-                                                <td><i className="fa fa-ellipsis-v" aria-hidden="true"></i></td>
+                                                <td><i className="fa fa-ellipsis-v" aria-hidden="true" onClick={()=>this.openMenuItem(item,index)}/>
+                                                    {
+                                                        this.state.flag && this.state.index === index &&
+                                                        <div className="office-dropDown">
+                                                            <p><a id={item.id} onClick={(event => (this.deleteUser(item.id)))}>Delete User</a></p>
+                                                        </div>
+                                                    }
+                                              </td>
                                             </tr>
                                         ))}
                                         </tbody>
@@ -94,16 +129,6 @@ export default class Users extends Component{
                                         <div className="row">
                                             <div className="col-lg-12">
                                                 <div className="multipleDiv">
-                                                    <div className="item-per-page">
-                                                        <label>Item per page:</label>
-                                                        <select>
-                                                            <option>1</option>
-                                                            <option>2</option>
-                                                            <option>3</option>
-                                                            <option>4</option>
-                                                            <option>5</option>
-                                                        </select>
-                                                    </div>
                                                     <div className="paginationText">
                                                         <p>1-5 of 20</p>
                                                     </div>
@@ -117,6 +142,75 @@ export default class Users extends Component{
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id="userModal" role="dialog">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <button type="button" className="close" data-dismiss="modal">&times;</button>
+                                    <h4 className="modal-title">New User</h4>
+                                </div>
+                                <div className="modal-body">
+                                    <div className="formDiv">
+                                        <div className="container-fluid">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="input-group">
+                                                        <input className="w-100" type="text" required name="office-name"
+                                                               id="office-name"/>
+                                                        <span className="highlight"></span>
+                                                        <span className="bar"></span>
+                                                        <label>First Name</label>
+                                                    </div>
+
+                                                </div>
+                                                <div className="col-lg-6">
+                                                    <div className="input-group">
+                                                        <input type="text" required id="location" className="w-100"/>
+                                                        <span className="highlight"></span>
+                                                        <span className="bar"></span>
+                                                        <label>Last name</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row m-t-20">
+                                                <div className="col-lg-6">
+                                                    <div className="input-group">
+                                                        <input className="w-100" type="text" required name="office-name"
+                                                               id="office-name"/>
+                                                        <span className="highlight"></span>
+                                                        <span className="bar"></span>
+                                                        <label>Email</label>
+                                                    </div>
+
+                                                </div>
+                                                <div className="col-lg-6">
+                                                    <div className="input-group">
+                                                        <input type="text" required id="location" className="w-100"/>
+                                                        <span className="highlight"></span>
+                                                        <span className="bar"></span>
+                                                        <label>Password</label>
+                                                    </div>
+                                                </div>
+                                                <div className="row m-t-20">
+                                                    <div className="col-lg-6">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-default cancelBtn"
+                                            data-dismiss="modal">CANCEL
+                                    </button>
+                                    <button type="button" className="btn btn-default createRoomBtn" data-dismiss="modal"
+                                            onClick={this.createUser}>CREATE USER
+                                    </button>
                                 </div>
                             </div>
                         </div>
