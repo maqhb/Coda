@@ -143,7 +143,7 @@ export default class Users extends Component{
                                         <tbody>
                                         {(this.state.users === null)?this.state.msg:this.state.users.map((item, index) => (
                                             <tr>
-                                                <td>1</td>
+                                                <td>{index+1}</td>
                                                 <td>
                                                     <div className="userNameImg">
                                                         <img src={(item.photo === "" || item.photo === null) ? userTable : item.photo}
