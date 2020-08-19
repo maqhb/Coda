@@ -164,8 +164,13 @@ export default class Users extends Component{
                         </div>
                         <div className="search-Bar">
                             <div className="row">
-                                <div className="col-lg-12">
-                                    <input placeholder="Search User"/>
+                                <div className="col-lg-8 col-md-8">
+                                    <input placeholder="Search User" onSubmit={(event)=>console.log("hello")}/>
+                                </div>
+                                <div className="new-user col-md-3">
+                                    <span>
+                                        <a>SEARCH</a>
+                                    </span>
                                 </div>
                             </div>
                         </div>

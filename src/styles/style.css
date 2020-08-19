@@ -700,10 +700,15 @@ button.close:focus{
 #dashBoard .main-content #button-services h3{
     font-weight: 600;
 }
-#dashBoard .main-content #button-services .new-button-service,#user .new-user{
+#dashBoard .main-content #button-services .new-button-service{
     float: right;
     margin-right: 15px;
     margin-top: 30px;
+}
+#user .new-user{
+    float: right;
+    margin-right: 15px;
+    margin-top: 10px;
 }
 #dashBoard .main-content #button-services .new-button-service span,#user .new-user span{
     background: #15d1a5;
@@ -1159,7 +1164,11 @@ button.close:focus{
     #button-services .modal-dialog {
         max-width: 100%;
     }
-    #dashBoard .main-content #button-services .new-button-service,#user .new-user {
+    #dashBoard .main-content #button-services .new-button-service {
+        margin-top: 20px;
+        float: left;
+    }
+    #user .new-user {
         margin-top: 20px;
         float: left;
     }
