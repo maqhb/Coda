@@ -14,6 +14,7 @@ class Actions extends Component{
         this.newAction = this.newAction.bind(this)
         this.newMakeButton = this.newMakeButton.bind(this)
         this.deleteAction = this.deleteAction.bind(this)
+        this.updateId = ""
     }
 
     componentDidMount() {
@@ -26,7 +27,7 @@ class Actions extends Component{
         let description = document.getElementById("description").value
         if(btnName !==  "" || description !== ""){
             btnColor = (btnColor === '#15d1a5')?1:0
-            this.newAction(btnName, btnColor, description)
+            this.newAction(btnName, btnColor, description, this.updateId)
         }
     }
     getActions(){
@@ -44,8 +45,8 @@ class Actions extends Component{
         })
     }
 
-    newAction(btnName, btnColor, description){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/action/save?access_token="+Cookies.get("token")+"&title="+btnName+"&color="+btnColor+"&caption="+description).then((response)=>{
+    newAction(btnName, btnColor, description, id){
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/action/save?access_token="+Cookies.get("token")+"&title="+btnName+"&color="+btnColor+"&caption="+description+"&id="+id).then((response)=>{
             if(response.data.success){
                 this.getActions()
             }
@@ -145,7 +146,7 @@ class Actions extends Component{
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="new-button-service">
-                                    <span type="button"  data-toggle="modal" data-target="#buttonModal" className="modalBtn">
+                                    <span type="button"  data-toggle="modal" onClick={event => this.updateId=""} data-target="#buttonModal" className="modalBtn">
                                         <a>NEW BUTTON SERVICE</a>
                                     </span>
                                 </div>
@@ -166,7 +167,7 @@ class Actions extends Component{
                                             <div className="btnDiv">
                                                 <button style={{backgroundColor:(item.color === "1")?"#15d1a5":"#f0ad4e"}}><strong>{item.title}</strong><br/>{item.caption} </button>
                                                 <div className="iconDiv">
-                                                    <FontAwesomeIcon icon={faPen}/>
+                                                    <FontAwesomeIcon icon={faPen} data-toggle="modal" data-target="#buttonModal" onClick={(event => this.updateId=item.id)}/>
                                                     <FontAwesomeIcon icon={faTrash} onClick={(event => this.deleteAction(item.id))}/>
                                                 </div>
                                             </div>
