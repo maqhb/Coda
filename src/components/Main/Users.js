@@ -211,8 +211,8 @@ export default class Users extends Component{
                                                                 </li>
                                                                 <li className="context-menu__item">
                                                                 {item != null && 
-                                                                    <a id={item.id} className="context-menu__link" data-toggle="modal" data-target="#userModal">
-                                                                        <i className="fa fa-edit" onClick={(event => this.openModalWithData(item))}>Edit User</i>
+                                                                    <a id={item.id} className="context-menu__link" onClick={(event => this.openModalWithData(item))} data-toggle="modal" data-target="#userModal">
+                                                                        <i className="fa fa-edit" ></i>Edit User
                                                                     </a>
                                                                 }
                                                                 </li>
