@@ -7,6 +7,7 @@ export default class Users extends Component{
     constructor(props){
         super(props)
         this.getUsers = this.getUsers.bind(this)
+        this.searchUser = this.searchUser.bind(this)
         this.state = {
             users : null,
             msg:"Loading",
@@ -29,6 +30,7 @@ export default class Users extends Component{
         this.password = ""
         this.itemNo=0
         this.id=-1
+        this.val=""
     }
     componentDidMount() {
         if(this.state.page === 0 ){
@@ -122,6 +124,25 @@ export default class Users extends Component{
         .catch(error => console.log('error', error));
     }
 
+    searchUser(val){
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/user/list?access_token="+Cookies.get("token")+"&search="+val).then((response)=>{
+            if(response.data.success){
+                this.setState({
+                    users : response.data.response.data,
+                    itemNum : response.data.response.from-1,
+                    
+                })
+            }
+            else{
+                this.setState({
+                    msg:response.data.error.message
+                })
+            }
+        }).catch((error)=>{
+            alert(error)
+        })
+    }
+
 
     deleteUser(id){
         let myHeaders = new Headers();
@@ -165,9 +186,9 @@ export default class Users extends Component{
                         <div className="search-Bar">
                             <div className="row">
                                 <div className="col-lg-8 col-md-8">
-                                    <input placeholder="Search User" onSubmit={(event)=>console.log("hello")}/>
+                                    <input placeholder="Search User" onChange={(event)=>{this.val = event.target.value}} />
                                 </div>
-                                <div className="new-user col-md-3">
+                                <div className="new-user col-md-3" onClick={()=>this.searchUser(this.val)}>
                                     <span>
                                         <a>SEARCH</a>
                                     </span>
@@ -214,7 +235,7 @@ export default class Users extends Component{
                                                                 </li>
                                                                 <li className="context-menu__item">
                                                                 {item != null && 
-                                                                    <a id={item.id} className="context-menu__link" onClick={(event => this.openModalWithData(item))} data-toggle="modal" data-target="#userModal">
+                                                                    <a id={item.id} className="context-menu__link" onClick={(event => this.openModalWithData(item))} data-toggle="modal" data-target="#editModal">
                                                                         <i className="fa fa-edit" ></i>Edit User
                                                                     </a>
                                                                 }
@@ -261,6 +282,8 @@ export default class Users extends Component{
                             </div>
                         </div>
                     </div>
+
+
                     <div className="modal fade" id="userModal" role="dialog">
                         <div className="modal-dialog">
                             <div className="modal-content">
@@ -278,8 +301,8 @@ export default class Users extends Component{
                                                                id="firstname"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
-                                                        <label>{(this.firstname==="")?"First Name":this.firstname}</label>
-                                                        
+                                                        <label>First Name</label>
+
                                                     </div>
 
                                                 </div>
@@ -288,7 +311,7 @@ export default class Users extends Component{
                                                         <input type="text" required id="lastname" onChange={(event => {this.lastname = event.target.value})} className="w-100"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
-                                                        <label>{(this.lastname==="")?"Last Name":this.lastname}</label>
+                                                        <label>Last Name</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -299,7 +322,7 @@ export default class Users extends Component{
                                                                id="office-name"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
-                                                        <label>{(this.email==="")?"Email":this.email}</label>
+                                                        <label>Email</label>
                                                     </div>
 
                                                 </div>
@@ -331,7 +354,83 @@ export default class Users extends Component{
                             </div>
                         </div>
                     </div>
+
+                    <div className="modal fade" id="editModal" role="dialog">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <button type="button" className="close" data-dismiss="modal">&times;</button>
+                                    <h4 className="modal-title">Edit User</h4>
+                                </div>
+                                <div className="modal-body">
+                                    <div className="formDiv">
+                                        <div className="container-fluid">
+                                            <div className="row">
+                                                <div className="col-lg-6">
+                                                    <div className="input-group">
+                                                        <input className="w-100" onChange={(event => {this.firstname = event.target.value})}  type="text" required name="office-name"
+                                                               id="firstname"/>
+                                                        <span className="highlight"></span>
+                                                        <span className="bar"></span>
+                                                    <label>{this.firstname}</label>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                                <div className="col-lg-6">
+                                                    <div className="input-group">
+                                                        <input type="text" required id="lastname" onChange={(event => {this.lastname = event.target.value})} className="w-100"/>
+                                                        <span className="highlight"></span>
+                                                        <span className="bar"></span>
+                                                    <label>{this.lastname}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row m-t-20">
+                                                <div className="col-lg-6">
+                                                    <div className="input-group">
+                                                        <input className="w-100" type="email" onChange={(event => {this.email = event.target.value})} required name="office-name"
+                                                               id="office-name"/>
+                                                        <span className="highlight"></span>
+                                                        <span className="bar"></span>
+                                                    <label>{this.email}</label>
+                                                    </div>
+
+                                                </div>
+                                                <div className="col-lg-6">
+                                                    <div className="input-group">
+                                                        <input type="password" required  onChange={(event => {this.password = event.target.value})} id="password" className="w-100"/>
+                                                        <span className="highlight"></span>
+                                                        <span className="bar"></span>
+                                                        <label>Password</label>
+                                                    </div>
+                                                </div>
+                                                <div className="row m-t-20">
+                                                    <div className="col-lg-6">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-default cancelBtn"
+                                            data-dismiss="modal">CANCEL
+                                    </button>
+                                    <button type="button" className="btn btn-default createRoomBtn" data-dismiss="modal"
+                                            onClick={this.createUser}>EDIT USER
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+            
+                
+
                 </div>
+                
             )
     }
 }
