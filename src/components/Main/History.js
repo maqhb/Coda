@@ -65,7 +65,7 @@ class History extends Component{
         let myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        let raw = JSON.stringify({"access_token":"7d4a11c5a1d0d8cfb1fe8cd7af7fd272fb3ab065","search":this.searchQuery.toString()});
+        let raw = JSON.stringify({"access_token":Cookies.get("token"),"search":this.searchQuery.toString()});
 
         let requestOptions = {
             method: 'POST',
