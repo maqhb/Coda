@@ -185,9 +185,23 @@ export default class Users extends Component{
                                                 <td><i className="fa fa-ellipsis-v" aria-hidden="true" onClick={()=>this.openMenuItem(item,index)}/>
                                                     {
                                                         this.state.flag && this.state.index === index &&
-                                                        <div className="office-dropDown">
-                                                            <p><a id={item.id} onClick={(event => (this.deleteUser(item.id)))}>Delete User</a></p>
-                                                        </div>
+                                                        <>
+                                                        <nav className="context-menu">
+                                                            <ul className="context-menu__items">
+                                                                <li className="context-menu__item">
+                                                                    <a id={item.id} className="context-menu__link"
+                                                                       onClick={(event => (this.deleteUser(item.id)))}>
+                                                                        <i className="fa fa-times"></i> Delete User
+                                                                    </a>
+                                                                </li>
+                                                                <li className="context-menu__item">
+                                                                    <a id={item.id} className="context-menu__link">
+                                                                        <i className="fa fa-edit"></i> Edit User
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </nav>
+                                                        </>
                                                     }
                                               </td>
                                             </tr>
