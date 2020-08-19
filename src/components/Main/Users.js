@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import userTable from "../../assets/dashboard/userTable.png";
 import Axios from "axios";
 import Cookies from "js-cookie";
-import ReactImageUploadComponent from "react-images-upload";
 
 export default class Users extends Component{
     constructor(props){
@@ -21,6 +20,7 @@ export default class Users extends Component{
         this.getUserPage =  this.getUserPage.bind(this)
         this.getUsers = this.getUsers.bind(this)
         this.openMenuItem =this.openMenuItem.bind(this)
+        this.openModalWithData = this.openModalWithData.bind(this)
         this.firstname = ""
         this.lastname = ""
         this.email = ""
@@ -28,7 +28,7 @@ export default class Users extends Component{
         this.itemNo=0
     }
     componentDidMount() {
-        if(this.state.page === 0){
+        if(this.state.page === 0 ){
             this.getUsers(1)
         }
     }
@@ -77,6 +77,13 @@ export default class Users extends Component{
         else{
             this.setState({flag:true,card:item,index});
         }
+    }
+
+    openModalWithData(item){
+            this.firstname=item.firstname
+            this.lastname = item.lastname
+            this.email = item.email
+            console.log(this.email)
     }
 
     createUser(){
@@ -132,6 +139,7 @@ export default class Users extends Component{
 
 
     render() {
+        this.itemNo = this.state.itemNum
             return (
                 <div id="user" className="tab-pane fade">
                     <div className="container-fluid">
@@ -195,8 +203,8 @@ export default class Users extends Component{
                                                                     </a>
                                                                 </li>
                                                                 <li className="context-menu__item">
-                                                                    <a id={item.id} className="context-menu__link">
-                                                                        <i className="fa fa-edit"></i> Edit User
+                                                                    <a id={item.id} className="context-menu__link" data-toggle="modal" data-target="#userModal">
+                                                                        <i className="fa fa-edit" onClick={(event => this.openModalWithData(item))}>Edit User</i>
                                                                     </a>
                                                                 </li>
                                                             </ul>
@@ -259,7 +267,8 @@ export default class Users extends Component{
                                                                id="firstname"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
-                                                        <label>First Name</label>
+                                                        <label>{(this.firstname==="")?"First Name":this.firstname}</label>
+                                                        {console.log(this.firstname)}
                                                     </div>
 
                                                 </div>
@@ -268,7 +277,7 @@ export default class Users extends Component{
                                                         <input type="text" required id="lastname" onChange={(event => {this.lastname = event.target.value})} className="w-100"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
-                                                        <label>Last name</label>
+                                                        <label>{(this.lastname==="")?"Last Name":this.lastname}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -279,7 +288,7 @@ export default class Users extends Component{
                                                                id="office-name"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
-                                                        <label>Email</label>
+                                                        <label>{(this.email==="")?"Email":this.email}</label>
                                                     </div>
 
                                                 </div>
