@@ -15,7 +15,8 @@ class MainDashboard extends Component{
             complete:false,
             way:false,
             room:false,
-            recived:false
+            recived:false,
+            
         }
         this.getRecentRooms = this.getRecentRooms.bind(this)
         this.filterRooms = this.filterRooms.bind(this)
@@ -125,11 +126,11 @@ class MainDashboard extends Component{
                                         } else if (item.request.status === 2) {
                                             status = " waiting request"
                                         } else if (item.request.status === 3) {
-                                            status = " completed at " + item.date_completed
+                                            status = " completed at " + item.request.date_completed
                                         } else if (item.request.status === 4) {
                                             status = " cancelled request"
                                         } else if (item.request.status === 5) {
-                                            status = " arrived at "+item.date_arrive
+                                            status = " arrived at "+item.request.date_arrive
                                         }
                                     }
                                     return(
