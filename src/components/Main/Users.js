@@ -13,7 +13,9 @@ export default class Users extends Component{
             flag: false,
             index:null,
             page: 0,
-            itemNum:0
+            itemNum:0,
+            modalFieldsSet : false
+
         }
         this.createUser =this.createUser.bind(this)
         this.deleteUser = this.deleteUser.bind(this)
@@ -26,6 +28,7 @@ export default class Users extends Component{
         this.email = ""
         this.password = ""
         this.itemNo=0
+        this.id=-1
     }
     componentDidMount() {
         if(this.state.page === 0 ){
@@ -34,12 +37,13 @@ export default class Users extends Component{
     }
 
     getUsers(page){
-        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/user/list?asc=1&access_token="+Cookies.get("token")+"&page="+page+"&limit="+2).then((response)=>{
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com/user/list?asc=1&access_token="+Cookies.get("token")+"&page="+page+"&limit="+5).then((response)=>{
             if(response.data.success){
                 this.setState({
                     users : response.data.response.data,
                     page:(this.state.page > 0)?page:1,
-                    itemNum : response.data.response.from-1
+                    itemNum : response.data.response.from-1,
+                    
                 })
             }
             else{
@@ -83,7 +87,9 @@ export default class Users extends Component{
             this.firstname=item.firstname
             this.lastname = item.lastname
             this.email = item.email
-            console.log(this.email)
+            this.id=item.id
+            this.setState({modalFieldsSet: true})
+            
     }
 
     createUser(){
@@ -92,7 +98,8 @@ export default class Users extends Component{
             firstname: this.firstname,
             lastname: this.lastname,
             email: this.email,
-            password: this.password
+            password: this.password,
+            id: this.id
         }
 
         var myHeaders = new Headers();
@@ -110,7 +117,8 @@ export default class Users extends Component{
         fetch("https://kallpod-dev-php.ue.r.appspot.com/user/save", requestOptions)
         .then(response => response.text())
         .then(result =>{
-            this.getUsers()
+            this.getUsers(this.state.page)
+            this.setState({flag:false,card:null,index:null})
         })
         .catch(error => console.log('error', error));
     }
@@ -171,7 +179,7 @@ export default class Users extends Component{
                                             <th>No.</th>
                                             <th>User Name</th>
                                             <th>Role</th>
-                                            <th>Office</th>
+                                            
                                             <th>Register In</th>
                                             <th>Actions</th>
                                         </tr>
@@ -179,7 +187,7 @@ export default class Users extends Component{
                                         <tbody>
                                         {(this.state.users === null)?this.state.msg:this.state.users.map((item, index) => (
                                             <tr>
-                                                <td>{index+1}</td>
+                                                <td>{item.id}</td>
                                                 <td>
                                                     <div className="userNameImg">
                                                         <img src={(item.photo === "" || item.photo === null) ? userTable : item.photo}
@@ -188,7 +196,6 @@ export default class Users extends Component{
                                                     </div>
                                                 </td>
                                                 <td>{(item.role === 1) ? "Admin" : "Technician"}</td>
-                                                <td>5 - D</td>
                                                 <td>{item.created_at}</td>
                                                 <td><i className="fa fa-ellipsis-v" aria-hidden="true" onClick={()=>this.openMenuItem(item,index)}/>
                                                     {
@@ -203,9 +210,11 @@ export default class Users extends Component{
                                                                     </a>
                                                                 </li>
                                                                 <li className="context-menu__item">
+                                                                {item != null && 
                                                                     <a id={item.id} className="context-menu__link" data-toggle="modal" data-target="#userModal">
                                                                         <i className="fa fa-edit" onClick={(event => this.openModalWithData(item))}>Edit User</i>
                                                                     </a>
+                                                                }
                                                                 </li>
                                                             </ul>
                                                         </nav>
@@ -263,12 +272,12 @@ export default class Users extends Component{
                                             <div className="row">
                                                 <div className="col-lg-6">
                                                     <div className="input-group">
-                                                        <input className="w-100" onChange={(event => {this.firstname = event.target.value})} type="text" required name="office-name"
+                                                        <input className="w-100" onChange={(event => {this.firstname = event.target.value})}  type="text" required name="office-name"
                                                                id="firstname"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
                                                         <label>{(this.firstname==="")?"First Name":this.firstname}</label>
-                                                        {console.log(this.firstname)}
+                                                        
                                                     </div>
 
                                                 </div>

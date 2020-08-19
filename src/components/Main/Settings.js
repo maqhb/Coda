@@ -53,7 +53,6 @@ export default class Settings extends Component{
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/mia-auth/update-profile?access_token="+Cookies.get("token")+"&firstname="+this.firstname+"&lastname="+this.lastname+"&email="+this.email+"&password="+this.password).then((response)=>{
             if(response.data.success){
                 alert("Successfully Changed");
-                
             }
             else{
                 this.setState({
