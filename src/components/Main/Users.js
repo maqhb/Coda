@@ -176,7 +176,7 @@ export default class Users extends Component{
                                 <h3>User</h3>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6">
-                                <div className="new-user" data-toggle="modal" data-target="#userModal">
+                                <div className="new-user" data-toggle="modal" data-target="#createModal">
                                                 <span>
                                                     <a>NEW USER</a>
                                                 </span>
@@ -235,7 +235,7 @@ export default class Users extends Component{
                                                                 </li>
                                                                 <li className="context-menu__item">
                                                                 {item != null && 
-                                                                    <a id={item.id} className="context-menu__link" onClick={(event => this.openModalWithData(item))} data-toggle="modal" data-target="#editModal">
+                                                                    <a id={item.id} className="context-menu__link" onClick={(event => this.openModalWithData(item))} data-toggle="modal" data-target="#userModal">
                                                                         <i className="fa fa-edit" ></i>Edit User
                                                                     </a>
                                                                 }
@@ -283,8 +283,7 @@ export default class Users extends Component{
                         </div>
                     </div>
 
-
-                    <div className="modal fade" id="userModal" role="dialog">
+                    <div className="modal fade" id="createModal" role="dialog">
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
@@ -355,7 +354,7 @@ export default class Users extends Component{
                         </div>
                     </div>
 
-                    <div className="modal fade" id="editModal" role="dialog">
+                    <div className="modal fade" id="userModal" role="dialog">
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
@@ -425,9 +424,6 @@ export default class Users extends Component{
                             </div>
                         </div>
                     </div>
-                
-            
-                
 
                 </div>
                 

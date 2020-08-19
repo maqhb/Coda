@@ -705,12 +705,12 @@ button.close:focus{
     margin-right: 15px;
     margin-top: 30px;
 }
-#user .new-user{
+#user .new-user, #history .search-button{
     float: right;
     margin-right: 15px;
     margin-top: 10px;
 }
-#dashBoard .main-content #button-services .new-button-service span,#user .new-user span{
+#dashBoard .main-content #button-services .new-button-service span,#user .new-user span, #history .search-button span{
     background: #15d1a5;
     padding: 10px 30px;
     border-radius: 5px;
@@ -718,7 +718,7 @@ button.close:focus{
 #dashBoard .main-content #button-services .btnDiv button {
     width: 250px;
 }
-#dashBoard .main-content #button-services .new-button-service span a,#user .new-user span a{
+#dashBoard .main-content #button-services .new-button-service span a,#user .new-user span a, #history .search-button span a{
     color: #fff;
 }
 #dashBoard .main-content #button-services .button-services-text{
@@ -1168,7 +1168,7 @@ button.close:focus{
         margin-top: 20px;
         float: left;
     }
-    #user .new-user {
+    #user .new-user, #history .search-button{
         margin-top: 20px;
         float: left;
     }

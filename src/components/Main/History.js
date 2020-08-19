@@ -14,6 +14,7 @@ class History extends Component{
         }
         this.fetchHistory = this.fetchHistory.bind(this)
         this.getHistory = this.getHistory.bind(this)
+        this.searchQuery = ""
         this.itemNo=0
     }
 
@@ -60,6 +61,25 @@ class History extends Component{
         this.fetchHistory(page)
     }
 
+    getSearch(){
+        let myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        let raw = JSON.stringify({"access_token":"7d4a11c5a1d0d8cfb1fe8cd7af7fd272fb3ab065","search":this.searchQuery.toString()});
+
+        let requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("https://kallpod-dev-php.ue.r.appspot.com/request/list", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+
     render() {
         if(this.state.history === null){
             return (
@@ -74,8 +94,15 @@ class History extends Component{
                 <h3>Historical Support Request</h3>
                 <div className="search-Bar">
                     <div className="row">
-                        <div className="col-lg-12">
-                            <input placeholder="Search User"/>
+                        <div className="col-lg-8">
+                            <input placeholder="Search User" onChange={(event) => {
+                                (event.target.value === "")?this.fetchHistory(this.state.page):this.searchQuery = event.target.value;
+                            }}/>
+                        </div>
+                        <div className="search-button col-md-3">
+                                    <span>
+                                        <a onClick={(event => (this.getSearch()))}>SEARCH</a>
+                                    </span>
                         </div>
                     </div>
                 </div>
