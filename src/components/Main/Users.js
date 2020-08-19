@@ -89,7 +89,6 @@ export default class Users extends Component{
             this.email = item.email
             this.id=item.id
             this.setState({modalFieldsSet: true})
-            
     }
 
     createUser(){
@@ -140,7 +139,7 @@ export default class Users extends Component{
         fetch("https://kallpod-dev-php.ue.r.appspot.com/user/remove", requestOptions)
                 .then(response => response.text())
                 .then(result => {
-                    this.getUsers()
+                    this.getUsers(this.state.page)
                 })
                 .catch(error => console.log('error', error));
     }
@@ -200,7 +199,6 @@ export default class Users extends Component{
                                                 <td><i className="fa fa-ellipsis-v" aria-hidden="true" onClick={()=>this.openMenuItem(item,index)}/>
                                                     {
                                                         this.state.flag && this.state.index === index &&
-                                                        <>
                                                         <nav className="context-menu">
                                                             <ul className="context-menu__items">
                                                                 <li className="context-menu__item">
@@ -218,7 +216,6 @@ export default class Users extends Component{
                                                                 </li>
                                                             </ul>
                                                         </nav>
-                                                        </>
                                                     }
                                               </td>
                                             </tr>
