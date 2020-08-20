@@ -118,25 +118,29 @@ class MainDashboard extends Component{
                             {
                                 this.state.rooms.map((item, index)=>{
                                     let status  = ""
+                                    let colorClass = "roomDetail y-l-b"
                                     if(item.request !== null) {
                                         if (item.request.status === 0) {
                                             status = "pending request"
                                         } else if (item.request.status === 1) {
                                             status = " accepted at " + item.request.date_accept
+                                            colorClass = "roomDetail r-l-b"
                                         } else if (item.request.status === 2) {
                                             status = " waiting request"
                                         } else if (item.request.status === 3) {
                                             status = " completed at " + item.request.date_completed
+                                            colorClass ="roomDetail g-l-b"
                                         } else if (item.request.status === 4) {
                                             status = " cancelled request"
                                         } else if (item.request.status === 5) {
                                             status = " arrived at "+item.request.date_arrive
+                                            colorClass = "roomDetail b-l-b"
                                         }
                                     }
                                     return(
                                     <div className="col-lg-3 col-md-6">
                                         <div className="roomCard">
-                                            <div className="roomDetail y-l-b">
+                                            <div className={colorClass}>
                                                 <h3>{item.title}</h3>
                                                 <p>Support Request</p>
                                                 <p className="text">{item.updated_at}</p>
