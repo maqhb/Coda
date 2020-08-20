@@ -20,29 +20,14 @@ class MainDashboard extends Component{
         }
         this.getRecentRooms = this.getRecentRooms.bind(this)
         this.filterRooms = this.filterRooms.bind(this)
-        this.checkFilter = this.checkFilter.bind(this)
+        
     }
 
     componentDidMount() {
         this.getRecentRooms()
     }
 
-    checkFilter = (e) =>{
-        if(e==="Complete"){
-            alert("Complete");
-            this.setState({allRoom:false,complete:true,way:false,recived:false,room:false});
-        }
-        else if(e==="Way"){
-            this.setState({allRoom:false,complete:false,way:true,recived:false,room:false});
-        }
-        else if(e==="Room"){
-            this.setState({allRoom:false,complete:false,way:false,recived:false,room:true});
-        }
-        else if(e==="Recived"){
-            this.setState({allRoom:false,complete:false,way:false,recived:true,room:false});
-        }
-    }
-    
+   
 
     getRecentRooms(){
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/room/dashboard?asc=1&limit=4&access_token="+Cookies.get("token")).then((response)=>{

@@ -10,7 +10,7 @@ export default class Users extends Component{
         this.searchUser = this.searchUser.bind(this)
         this.state = {
             users : null,
-            msg:"Loading",
+            msg:"",
             flag: false,
             index:null,
             page: 0,
@@ -255,7 +255,6 @@ export default class Users extends Component{
                                             <div className="col-lg-12">
                                                 <div className="multipleDiv">
                                                     <div className="paginationText">
-                                                        <p>1-5 of 20</p>
                                                     </div>
                                                     <div className="arrowsDiv">
                                                         <i className="fa fa-angle-double-left" id="doubleBack"

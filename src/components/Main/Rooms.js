@@ -4,8 +4,6 @@ import '../../styles/style.css';
 import office from "../../assets/dashboard/office.jpg";
 import more from "../../assets/dashboard/more.png";
 import Cookies from 'js-cookie'
-import {faCamera} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import QR from "../../assets/dashboard/qr.png";
 import ReactImageUploadComponent from "react-images-upload";
 
@@ -32,9 +30,10 @@ class Rooms extends Component{
         this.updateOfficeName = ""
         this.updateLocationAddr = ""
         this.updateButtons = ""
-        this.updateRoomID = null
+        this.updateRoomID = -1
         this.created_at = null
         this.newImage = null
+        
     }
 
     componentDidMount() {
@@ -43,6 +42,10 @@ class Rooms extends Component{
 
 
     openMenuItem(item,index){
+        this.updateOfficeName = this.state.newOffice[index].title;
+        this.updateLocationAddr = this.state.newOffice[index].address;
+        this.newImage = this.state.newOffice[index].photo;
+        this.updateRoomID = this.state.newOffice[index].id;
         if(this.state.index===index){
             this.setState({flag:false,card:null,index:null})
         }
@@ -70,14 +73,16 @@ class Rooms extends Component{
         let date = new Date().toJSON().replace("T"," ").substr(0,19)
         let formdata = new FormData()
         formdata.append("access_token",Cookies.get("token"))
-        formdata.append("title",this.officeName)
-        formdata.append("address",this.locationAddr)
+        formdata.append("id",(update)?this.updateRoomID:-1)
+        formdata.append("title",(update)?this.updateOfficeName:this.officeName)
+        formdata.append("address",(update)?this.updateLocationAddr:this.locationAddr)
         formdata.append("created_at",(update)?this.created_at:date)
         formdata.append("updated_at",date)
         formdata.append("latitude","0.00000000")
         formdata.append("longitude","0.00000000")
-        formdata.append("photo",new Blob(this.newImage))
-        formdata.append("buttons=",this.buttons)
+        formdata.append("photo",this.newImage)
+        formdata.append("buttons",(update)?this.updateButtons:this.buttons)
+        
         let config = {
             method: 'post',
             url: 'https://kallpod-dev-php.ue.r.appspot.com/room/save',
@@ -117,11 +122,13 @@ class Rooms extends Component{
                 console.log(response.data.response.data)
                 this.setState({
                     newOffice : response.data.response.data
-                })
+                })                
             }
             else{
                 this.setState({msg:"Failed to get Rooms"})
             }
+
+            
         }).catch((error)=>{
             console.log(error)
         })
@@ -141,6 +148,23 @@ class Rooms extends Component{
             alert(error)
         })
     }
+
+
+    storeImage(picture){
+        this.newImage = picture
+        Axios.post("https://kallpod-dev-php.ue.r.appspot.com//mia-core/upload-file?access_token="+Cookies.get("token")+"&file="+this.newImage).then((response)=>{
+            if(response.data.success){
+                console.log(response.data);
+            }
+            else{
+                alert("Failed to delete room")
+            }
+        }).catch((error)=>{
+            alert(error)
+        })
+
+    }
+
 
     render() {
         if(this.state.newOffice === null){
@@ -215,7 +239,7 @@ class Rooms extends Component{
                                                                      name="office-name" id="office-name"/>
                                                               <span className="highlight"></span>
                                                               <span className="bar"></span>
-                                                              <label>Name Offices</label>
+                                            <label>{this.updateOfficeName}</label>
                                                           </div>
 
                                                       </div>
@@ -225,7 +249,7 @@ class Rooms extends Component{
                                                                      className="w-100"/>
                                                               <span className="highlight"></span>
                                                               <span className="bar"></span>
-                                                              <label>Loation</label>
+                                            <label>{(this.updateLocationAddr!=null)? this.updateLocationAddr : "Location"}</label>
                                                           </div>
                                                       </div>
                                                   </div>
@@ -247,9 +271,10 @@ class Rooms extends Component{
                                                               buttonText='Upload images'
                                                               imgExtension={['.jpg', '.gif', '.png', '.gif']}
                                                               maxFileSize={5242880}
-                                                              onChange={(picture)=>(this.newImage = picture)}
+                                                              onChange={(picture)=>(this.storeImage(picture))}
                                                               singleImage={true}
                                                           />
+                                                          
                                                       </div>
                                                       <div className="col-lg-7">
                                                           <div className="imgContentDiv">
@@ -322,7 +347,7 @@ class Rooms extends Component{
                                                                   buttonText='Upload images'
                                                                   imgExtension={['.jpg', '.gif', '.png', '.gif']}
                                                                   maxFileSize={5242880}
-                                                                  onChange={(picture)=>(this.newImage = picture)}
+                                                                  onChange={(picture)=>(this.storeImage(picture))}
                                                                   singleImage={true}
                                                               />
                                                       </div>

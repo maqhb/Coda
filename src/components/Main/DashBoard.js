@@ -88,7 +88,7 @@ const DashBoard = (props) =>{
                             <Profile firstname={props.location.state.firstname} photo={props.location.state.photo} />
                             <div className="listDiv">
                                 <ul className="nav nav-pills nav-stacked">
-                                    <li className="active"><a data-toggle="pill" href="#home"><FontAwesomeIcon icon={faHome} /> DashBoard</a></li>
+                                    <li className="active"><a data-toggle="pill" onClick={()=>window.location.reload()}><FontAwesomeIcon icon={faHome} /> Dashboard</a></li>
                                     <li><a data-toggle="pill" href="#history"><FontAwesomeIcon icon={faHistory} /> History Request</a></li>
                                     <li><a data-toggle="pill" href="#offices"><FontAwesomeIcon icon={faBuilding} /> Offices</a></li>
                                     <li><a data-toggle="pill" href="#user"><FontAwesomeIcon icon={faUsers} /> User</a></li>

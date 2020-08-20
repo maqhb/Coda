@@ -8,27 +8,47 @@ class Actions extends Component{
     constructor(props){
         super(props)
         this.state={
-            actions : null
+            actions : null,
+            buttonmsg: "New Button Service",
+            update: false,
         }
         this.getActions = this.getActions.bind(this)
         this.newAction = this.newAction.bind(this)
         this.newMakeButton = this.newMakeButton.bind(this)
         this.deleteAction = this.deleteAction.bind(this)
+        this.uId = this.uId.bind(this)
+        this.uButton = this.uButton.bind(this)
+        this.resetVars = this.resetVars.bind(this)
         this.updateId = ""
+        this.updateName = "Name"
+        this.updateCaption = "Description"
     }
 
     componentDidMount() {
         this.getActions()
     }
 
+    resetVars(){
+        this.updateCaption=""
+        this.updateName=""
+        document.getElementById('btn-name').value = ""
+        document.getElementById("description").value = ""
+        this.setState({update: !this.state.update})
+    }
     newMakeButton() {
-        const btnName = document.getElementById('btn-name').value;
+        let btnName = document.getElementById('btn-name').value;
         var btnColor = document.getElementById("colors").value
         let description = document.getElementById("description").value
+        description = (description!="")?description:this.updateCaption
+        btnName = (btnName!="")?btnName:this.updateName
         if(btnName !==  "" || description !== ""){
+
             btnColor = (btnColor === '#15d1a5')?1:0
             this.newAction(btnName, btnColor, description, this.updateId)
+            description = ""
+            btnName = ""
         }
+        
     }
     getActions(){
         Axios.post("https://kallpod-dev-php.ue.r.appspot.com/action/list?asc=1&access_token="+Cookies.get("token")).then((response)=>{
@@ -56,6 +76,7 @@ class Actions extends Component{
         }).catch((error)=>{
             alert(error)
         })
+        this.resetVars()
     }
 
     deleteAction(id){
@@ -73,10 +94,24 @@ class Actions extends Component{
         })
     }
 
+    uId(item){
+        this.updateId=item.id
+        this.setState({buttonmsg: "Update Button Service"})
+        this.updateName = item.title
+        this.updateCaption = item.caption
+    }
+
+    uButton(){
+        this.updateId=""
+        this.setState({buttonmsg: "New Button Service"}) 
+        this.updateName = "Name"
+        this.updateCaption = "Description"
+    }
+
     render(){
         if(this.state.actions === null){
             return(
-                <h5>Loading ...</h5>
+                <h5>Loading</h5>
             )
         }else{
             return(
@@ -86,7 +121,7 @@ class Actions extends Component{
                             <div className="modal-content">
                                 <div className="modal-header">
                                     <button type="button" className="close" data-dismiss="modal">&times;</button>
-                                    <h4 className="modal-title">New Button Service</h4>
+            <h4 className="modal-title">{this.state.buttonmsg}</h4>
                                 </div>
                                 <div className="modal-body">
                                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
@@ -99,7 +134,7 @@ class Actions extends Component{
                                                         <input type="text" required id="btn-name"/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
-                                                        <label>Name</label>
+            <label>{this.updateName}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +156,7 @@ class Actions extends Component{
                                                         <input type="text" id="description" required/>
                                                         <span className="highlight"></span>
                                                         <span className="bar"></span>
-                                                        <label>Description</label>
+            <label>{this.updateCaption}</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,7 +181,7 @@ class Actions extends Component{
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="new-button-service">
-                                    <span type="button"  data-toggle="modal" onClick={event => this.updateId=""} data-target="#buttonModal" className="modalBtn">
+                                    <span type="button"  data-toggle="modal" onClick={event => this.uButton()} data-target="#buttonModal" className="modalBtn">
                                         <a>NEW BUTTON SERVICE</a>
                                     </span>
                                 </div>
@@ -167,7 +202,7 @@ class Actions extends Component{
                                             <div className="btnDiv">
                                                 <button style={{backgroundColor:(item.color === "1")?"#15d1a5":"#f0ad4e"}}><strong>{item.title}</strong><br/>{item.caption} </button>
                                                 <div className="iconDiv">
-                                                    <FontAwesomeIcon icon={faPen} data-toggle="modal" data-target="#buttonModal" onClick={(event => this.updateId=item.id)}/>
+                                                    <FontAwesomeIcon icon={faPen} data-toggle="modal" data-target="#buttonModal" onClick={(event => this.uId(item))}/>
                                                     <FontAwesomeIcon icon={faTrash} onClick={(event => this.deleteAction(item.id))}/>
                                                 </div>
                                             </div>
